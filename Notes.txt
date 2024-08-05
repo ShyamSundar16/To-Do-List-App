@@ -1,0 +1,15 @@
+{
+  "title": "Sample Todo",
+  "description": "This is a sample todo item",
+  "dueDate": "2023-12-31T23:59:59",
+  "completed": false,
+  "reminderDate": "2023-12-30T09:00:00",
+  "repeatInterval": "WEEKLY",
+  "user": {
+    "id": "user123",
+    "name": "John Doe"
+  },
+  "category": {
+    "id": "category123",
+    "name": "Work"
+  }
