@@ -36,7 +36,7 @@ public class TodoServiceImpl implements TodoService {
             todo.setCompleted(todoDetails.isCompleted());
             todo.setReminderDate(todoDetails.getReminderDate());
             todo.setRepeatInterval(todoDetails.getRepeatInterval());
-            todo.setUser(todoDetails.getUser());
+            todo.setUserId(todoDetails.getUserId());
             todo.setCategory(todoDetails.getCategory());
             return Optional.of(todoRepository.save(todo));
         }

@@ -19,9 +19,7 @@ public class Todo {
     private String description;
     private LocalDateTime dueDate;
     private boolean completed;
-
-    @DBRef
-    private User user;
+    private String userId;
 
     @DBRef
     private Category category;
