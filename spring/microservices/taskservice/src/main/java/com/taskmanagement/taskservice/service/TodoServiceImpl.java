@@ -9,8 +9,10 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TodoServiceImpl implements TodoService {
@@ -38,6 +40,12 @@ public class TodoServiceImpl implements TodoService {
             todo.setRepeatInterval(todoDetails.getRepeatInterval());
             todo.setUserId(todoDetails.getUserId());
             todo.setCategory(todoDetails.getCategory());
+
+            // Compute next due date if repeat interval is set
+            if (todo.getRepeatInterval() != null) {
+                todo.setDueDate(computeNextDueDate(todo));
+            }
+
             return Optional.of(todoRepository.save(todo));
         }
         return Optional.empty();
@@ -65,19 +73,34 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     @Cacheable(value = "todos", key = "#userId")
-    public List<Todo> findByUserId(String userId) {
-        return todoRepository.findByUserId(userId);
+    public List<Todo> findByUserIdAndFilters(String userId, Boolean completed, String category) {
+        List<Todo> todos = todoRepository.findByUserId(userId);
+        if (completed != null) {
+            todos = todos.stream().filter(todo -> todo.isCompleted() == completed).collect(Collectors.toList());
+        }
+        if (category != null && !category.isEmpty()) {
+            todos = todos.stream().filter(todo -> category.equals(todo.getCategory())).collect(Collectors.toList());
+        }
+        return todos;
     }
 
-    @Override
-    @Cacheable(value = "todos", key = "#categoryId")
-    public List<Todo> findByCategoryId(String categoryId) {
-        return todoRepository.findByCategoryId(categoryId);
-    }
 
     @Override
-    @Cacheable(value = "todos", key = "#completed")
-    public List<Todo> findByCompleted(boolean completed) {
-        return todoRepository.findByCompleted(completed);
+    public LocalDateTime computeNextDueDate(Todo todo) {
+        LocalDateTime nextDueDate = todo.getDueDate();
+        switch (todo.getRepeatInterval()) {
+            case "DAILY":
+                nextDueDate = nextDueDate.plusDays(1);
+                break;
+            case "WEEKLY":
+                nextDueDate = nextDueDate.plusWeeks(1);
+                break;
+            case "MONTHLY":
+                nextDueDate = nextDueDate.plusMonths(1);
+                break;
+            default:
+                break;
+        }
+        return nextDueDate;
     }
 }

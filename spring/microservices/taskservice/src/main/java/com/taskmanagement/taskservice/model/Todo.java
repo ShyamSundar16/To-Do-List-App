@@ -14,16 +14,12 @@ import java.time.LocalDateTime;
 public class Todo {
     @Id
     private String id;
-
     private String title;
     private String description;
     private LocalDateTime dueDate;
     private boolean completed;
     private String userId;
-
-    @DBRef
-    private Category category;
-
+    private String category;
     private LocalDateTime reminderDate;
     private String repeatInterval; // e.g., "DAILY", "WEEKLY", "MONTHLY"
 
