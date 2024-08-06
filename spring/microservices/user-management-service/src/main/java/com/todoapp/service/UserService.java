@@ -49,7 +49,7 @@ public class UserService {
             @CacheEvict(value = "users", allEntries = true)})
     public User modifyUser(String id, User user) {
         if (userRepository.existsById(id)) {
-            user.setId(id);
+            user.setEmail(id);
             return userRepository.save(user);
         } else {
             System.out.println("User not found with id: " + id);

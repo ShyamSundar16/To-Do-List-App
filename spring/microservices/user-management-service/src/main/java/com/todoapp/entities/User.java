@@ -12,9 +12,9 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 public class User {
     @Id
-    private String id;
-    private String name;
     private String email;
+    //private String id;
+    private String name;
     private Long phone;
     private String password;
     private String role;
@@ -22,8 +22,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
+                //"id='" + id + '\'' +
+                " name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phone=" + phone +
                 ", password='" + password + '\'' +
