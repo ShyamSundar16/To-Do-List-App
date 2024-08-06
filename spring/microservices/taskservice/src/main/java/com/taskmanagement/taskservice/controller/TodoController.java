@@ -46,4 +46,22 @@ public class TodoController {
         todoService.deleteTodoById(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Todo>> getTodosByUserId(@PathVariable String userId) {
+        List<Todo> todos = todoService.findByUserId(userId);
+        return ResponseEntity.ok(todos);
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<Todo>> getTodosByCategoryId(@PathVariable String categoryId) {
+        List<Todo> todos = todoService.findByCategoryId(categoryId);
+        return ResponseEntity.ok(todos);
+    }
+
+    @GetMapping("/completed/{completed}")
+    public ResponseEntity<List<Todo>> getTodosByCompleted(@PathVariable boolean completed) {
+        List<Todo> todos = todoService.findByCompleted(completed);
+        return ResponseEntity.ok(todos);
+    }
+
 }
