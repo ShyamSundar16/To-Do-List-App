@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,12 +25,11 @@ public class CustomTaskScheduler {
     @Autowired
     private TodoService todoService;
 
-    @Scheduled(fixedRate = 60000) // Check every minute
+    @Scheduled(fixedRate = 3600000) // Check every hour
     public void checkReminders() {
         List<Todo> todos = todoRepository.findAll();
-        LocalDateTime now = LocalDateTime.now();
         for (Todo todo : todos) {
-            if (todo.getReminderDate() != null && todo.getReminderDate().isBefore(now) && !todo.isCompleted()) {
+            if (todo.getReminderDate() != null && todo.getReminderDate().toLocalDate().isEqual(LocalDate.now()) && !todo.isCompleted()) {
                 notificationService.sendReminder(todo.getUserId(), "Reminder for task: " + todo.getTitle());
                 todo.setReminderDate(null); // Clear reminder date after sending notification
                 // Update due date if repeat interval is set
