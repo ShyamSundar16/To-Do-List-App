@@ -1,11 +1,10 @@
-// src/main/java/com/taskmanagement/taskservice/scheduler/TaskScheduler.java
-package com.taskmanagement.taskservice.config;
+package com.todo.notificationservice.config;
 
-import com.taskmanagement.taskservice.model.Status;
-import com.taskmanagement.taskservice.model.Todo;
-import com.taskmanagement.taskservice.repository.TodoRepository;
-import com.taskmanagement.taskservice.service.NotificationService;
-import com.taskmanagement.taskservice.service.TodoService;
+
+import com.todo.notificationservice.model.Status;
+import com.todo.notificationservice.model.Todo;
+import com.todo.notificationservice.repository.TodoRepository;
+import com.todo.notificationservice.service.NotificationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,6 @@ public class CustomTaskScheduler {
 
     @Autowired
     private NotificationService notificationService;
-
-    @Autowired
-    private TodoService todoService;
 
     @Scheduled(fixedRate = 3600000) // Check every hour
     public void checkReminders() {

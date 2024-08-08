@@ -1,0 +1,39 @@
+package com.todo.notificationservice.model;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+public class Todo {
+    @Id
+    private String id;
+
+    private String title;
+
+    private String description;
+
+    private LocalDateTime startDate;
+
+    private LocalDateTime endDate;
+
+    private Status status;
+
+    private int effortRequired;
+    private String userId;
+    private String category;
+    private LocalDateTime reminderDate;
+
+    // Custom validation for endDate
+    @Transient
+    public boolean isEndDateValid() {
+        Boolean isValidDate = endDate.isAfter(startDate);
+        if (reminderDate != null) {
+            isValidDate = reminderDate.isBefore(endDate) || reminderDate.equals(endDate);
+        }
+        return isValidDate;
+    }
+}
