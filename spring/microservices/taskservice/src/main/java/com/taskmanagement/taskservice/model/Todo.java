@@ -3,6 +3,7 @@ package com.taskmanagement.taskservice.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Min;
@@ -29,18 +30,21 @@ public class Todo {
     private LocalDateTime endDate;
 
     @NotNull(message = "Task status is mandatory")
-    private String status;
+    private Status status;
 
     @Min(value = 1, message = "Effort required must be greater than 0")
     private int effortRequired;
-    private boolean completed;
     private String userId;
     private String category;
     private LocalDateTime reminderDate;
-    private String repeatInterval; // e.g., "DAILY", "WEEKLY", "MONTHLY"
 
     // Custom validation for endDate
+    @Transient
     public boolean isEndDateValid() {
-        return endDate.isAfter(startDate);
+        Boolean isValidDate = endDate.isAfter(startDate);
+        if (reminderDate != null) {
+            isValidDate = reminderDate.isBefore(endDate) || reminderDate.equals(endDate);
+        }
+        return isValidDate;
     }
 }

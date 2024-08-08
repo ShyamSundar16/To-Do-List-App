@@ -1,6 +1,7 @@
 // src/main/java/com/taskmanagement/taskservice/controller/TodoController.java
 package com.taskmanagement.taskservice.controller;
 
+import com.taskmanagement.taskservice.model.Status;
 import com.taskmanagement.taskservice.model.Todo;
 import com.taskmanagement.taskservice.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,9 @@ public class TodoController {
     @GetMapping("/{userId}")
     public ResponseEntity<List<Todo>> getTodosByUserId(
             @PathVariable String userId,
-            @RequestParam(required = false) Boolean completed,
+            @RequestParam(required = false) Status status,
             @RequestParam(required = false) String category) {
-        List<Todo> todos = todoService.findByUserIdAndFilters(userId, completed, category);
+        List<Todo> todos = todoService.findByUserIdAndFilters(userId, status, category);
         return ResponseEntity.ok(todos);
     }
 

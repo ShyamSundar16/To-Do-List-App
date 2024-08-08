@@ -1,5 +1,6 @@
 package com.taskmanagement.taskservice.service;
 
+import com.taskmanagement.taskservice.model.Status;
 import com.taskmanagement.taskservice.model.Todo;
 import com.taskmanagement.taskservice.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,7 @@ public class TodoServiceImpl implements TodoService {
             todo.setEndDate(todoDetails.getEndDate());
             todo.setStatus(todoDetails.getStatus());
             todo.setEffortRequired(todoDetails.getEffortRequired());
-            todo.setCompleted(todoDetails.isCompleted());
             todo.setReminderDate(todoDetails.getReminderDate());
-            todo.setRepeatInterval(todoDetails.getRepeatInterval());
             todo.setUserId(todoDetails.getUserId());
             todo.setCategory(todoDetails.getCategory());
 
@@ -84,10 +83,10 @@ public class TodoServiceImpl implements TodoService {
 
     @Override
     @Cacheable(value = "todos", key = "#userId")
-    public List<Todo> findByUserIdAndFilters(String userId, Boolean completed, String category) {
+    public List<Todo> findByUserIdAndFilters(String userId, Status status, String category) {
         List<Todo> todos = todoRepository.findByUserId(userId);
-        if (completed != null) {
-            todos = todos.stream().filter(todo -> todo.isCompleted() == completed).collect(Collectors.toList());
+        if (status != null) {
+            todos = todos.stream().filter(todo -> status.equals(todo.getStatus()) ).collect(Collectors.toList());
         }
         if (category != null && !category.isEmpty()) {
             todos = todos.stream().filter(todo -> category.equals(todo.getCategory())).collect(Collectors.toList());
