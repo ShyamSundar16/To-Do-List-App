@@ -1,8 +1,6 @@
 package com.taskmanagement.taskservice.service;
 
 import com.taskmanagement.taskservice.model.Todo;
-
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,5 +11,4 @@ public interface TodoService {
     Optional<Todo> getTodoById(String id);
     void deleteTodoById(String id);
     List<Todo> findByUserIdAndFilters(String userId, Boolean completed, String category);
-    LocalDateTime computeNextDueDate(Todo todo);
 }

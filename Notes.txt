@@ -1,15 +1,13 @@
 {
-  "title": "Sample Todo",
-  "description": "This is a sample todo item",
-  "dueDate": "2023-12-31T23:59:59",
+  "title": "Complete project documentation",
+  "description": "Write and review the project documentation for the upcoming release.",
+  "startDate": "2023-10-01T09:00:00",
+  "endDate": "2023-10-05T17:00:00",
+  "status": "In Progress",
+  "effortRequired": 10,
   "completed": false,
-  "reminderDate": "2023-12-30T09:00:00",
-  "repeatInterval": "WEEKLY",
-  "user": {
-    "id": "user123",
-    "name": "John Doe"
-  },
-  "category": {
-    "id": "category123",
-    "name": "Work"
-  }
+  "userId": "user123",
+  "category": "Work",
+  "reminderDate": "2023-10-04T09:00:00",
+  "repeatInterval": "DAILY"
+}

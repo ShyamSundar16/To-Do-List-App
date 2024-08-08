@@ -29,13 +29,10 @@ public class CustomTaskScheduler {
         List<Todo> todos = todoRepository.findAll();
         LocalDateTime now = LocalDateTime.now();
         for (Todo todo : todos) {
-            if (todo.getReminderDate() != null && todo.getReminderDate().isBefore(now) && !todo.isCompleted()) {
+            if (((todo.getReminderDate() != null && todo.getReminderDate().isEqual(now)) ||(todo.getEndDate().isEqual(now)))
+                    && !todo.isCompleted()) {
                 notificationService.sendReminder(todo.getUserId(), "Reminder for task: " + todo.getTitle());
                 todo.setReminderDate(null); // Clear reminder date after sending notification
-                // Update due date if repeat interval is set
-                if (todo.getRepeatInterval() != null) {
-                    todo.setDueDate(todoService.computeNextDueDate(todo));
-                }
                 todoRepository.save(todo);
             }
         }

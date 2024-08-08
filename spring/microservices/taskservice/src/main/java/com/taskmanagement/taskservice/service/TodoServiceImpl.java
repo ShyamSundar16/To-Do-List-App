@@ -1,4 +1,3 @@
-// src/main/java/com/taskmanagement/taskservice/service/impl/TodoServiceImpl.java
 package com.taskmanagement.taskservice.service;
 
 import com.taskmanagement.taskservice.model.Todo;
@@ -23,6 +22,10 @@ public class TodoServiceImpl implements TodoService {
     @Override
     @CachePut(value = "todos", key = "#todo.id")
     public Todo addTodo(Todo todo) {
+        // Validate endDate
+        if (!todo.isEndDateValid()) {
+            throw new IllegalArgumentException("End date must be after start date");
+        }
         return todoRepository.save(todo);
     }
 
@@ -34,17 +37,25 @@ public class TodoServiceImpl implements TodoService {
             Todo todo = optionalTodo.get();
             todo.setTitle(todoDetails.getTitle());
             todo.setDescription(todoDetails.getDescription());
-            todo.setDueDate(todoDetails.getDueDate());
+            todo.setStartDate(todoDetails.getStartDate());
+            todo.setEndDate(todoDetails.getEndDate());
+            todo.setStatus(todoDetails.getStatus());
+            todo.setEffortRequired(todoDetails.getEffortRequired());
             todo.setCompleted(todoDetails.isCompleted());
             todo.setReminderDate(todoDetails.getReminderDate());
             todo.setRepeatInterval(todoDetails.getRepeatInterval());
             todo.setUserId(todoDetails.getUserId());
             todo.setCategory(todoDetails.getCategory());
 
-            // Compute next due date if repeat interval is set
-            if (todo.getRepeatInterval() != null) {
-                todo.setDueDate(computeNextDueDate(todo));
+            // Validate endDate
+            if (!todo.isEndDateValid()) {
+                throw new IllegalArgumentException("End date must be after start date");
             }
+
+            // Compute next due date if repeat interval is set
+            /*if (todo.getRepeatInterval() != null) {
+                todo.setDueDate(computeNextDueDate(todo));
+            }*/
 
             return Optional.of(todoRepository.save(todo));
         }
@@ -82,25 +93,5 @@ public class TodoServiceImpl implements TodoService {
             todos = todos.stream().filter(todo -> category.equals(todo.getCategory())).collect(Collectors.toList());
         }
         return todos;
-    }
-
-
-    @Override
-    public LocalDateTime computeNextDueDate(Todo todo) {
-        LocalDateTime nextDueDate = todo.getDueDate();
-        switch (todo.getRepeatInterval()) {
-            case "DAILY":
-                nextDueDate = nextDueDate.plusDays(1);
-                break;
-            case "WEEKLY":
-                nextDueDate = nextDueDate.plusWeeks(1);
-                break;
-            case "MONTHLY":
-                nextDueDate = nextDueDate.plusMonths(1);
-                break;
-            default:
-                break;
-        }
-        return nextDueDate;
     }
 }
