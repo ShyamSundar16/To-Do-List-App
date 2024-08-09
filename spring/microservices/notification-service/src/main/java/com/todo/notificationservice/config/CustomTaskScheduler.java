@@ -32,7 +32,7 @@ public class CustomTaskScheduler {
             if (((todo.getReminderDate() != null && todo.getReminderDate().toLocalDate().isEqual(now.toLocalDate())) ||(todo.getEndDate().isEqual(now)))
                     && !Status.COMPLETED.equals(todo.getStatus())) {
                 log.info("Sending reminder for task");
-                notificationService.sendReminder(todo.getUserId(), "Reminder for task: " + todo.getTitle());
+                notificationService.sendReminder(todo.getUserId(), "Task Reminder","Reminder for task: " + todo.getTitle());
                 todo.setReminderDate(null); // Clear reminder date after sending notification
                 todoRepository.save(todo);
             }

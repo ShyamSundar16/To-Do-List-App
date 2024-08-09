@@ -12,12 +12,12 @@ public class NotificationServiceImpl implements NotificationService {
     private JavaMailSender emailSender;
 
     @Override
-    public void sendReminder(String userId, String message) {
+    public void sendReminder(String userId, String subject, String message) {
         try {
             MimeMessage mimeMessage = emailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
             helper.setTo(userId); // Assuming userId is the email address
-            helper.setSubject("Task Reminder");
+            helper.setSubject(subject);
             helper.setText(message, true); // true indicates HTML content
             emailSender.send(mimeMessage);
         } catch (Exception e) {

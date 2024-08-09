@@ -29,7 +29,7 @@ public class Todo {
     private String userId;
     private String category;
     private LocalDateTime reminderDate;
-
+    private String eventName;
     // Custom validation for endDate
     @Transient
     public boolean isEndDateValid() {

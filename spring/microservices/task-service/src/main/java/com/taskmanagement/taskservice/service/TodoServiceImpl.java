@@ -1,5 +1,7 @@
 package com.taskmanagement.taskservice.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taskmanagement.taskservice.model.Status;
 import com.taskmanagement.taskservice.model.Todo;
 import com.taskmanagement.taskservice.repository.TodoRepository;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +22,11 @@ public class TodoServiceImpl implements TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+    ObjectMapper objectMapper = new ObjectMapper();
+    private static final String TOPIC = "todo-events";
+
     @Override
     @CachePut(value = "todos", key = "#todo.id")
     public Todo addTodo(Todo todo) {
@@ -26,6 +34,7 @@ public class TodoServiceImpl implements TodoService {
         if (!todo.isEndDateValid()) {
             throw new IllegalArgumentException("End date must be after start date");
         }
+        notifyUser(todo, "CREATED");
         return todoRepository.save(todo);
     }
 
@@ -49,7 +58,7 @@ public class TodoServiceImpl implements TodoService {
             if (!todo.isEndDateValid()) {
                 throw new IllegalArgumentException("End date must be after start date");
             }
-
+            notifyUser(todo, "UPDATED");
             return Optional.of(todoRepository.save(todo));
         }
         return Optional.empty();
@@ -86,5 +95,15 @@ public class TodoServiceImpl implements TodoService {
             todos = todos.stream().filter(todo -> category.equals(todo.getCategory())).collect(Collectors.toList());
         }
         return todos;
+    }
+
+    private void notifyUser(Todo todo, String eventName) {
+        try {
+            todo.setEventName(eventName);
+            String todoJson = objectMapper.writeValueAsString(todo);
+            kafkaTemplate.send(TOPIC, todoJson);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Failed to convert Todo to JSON", e);
+        }
     }
 }

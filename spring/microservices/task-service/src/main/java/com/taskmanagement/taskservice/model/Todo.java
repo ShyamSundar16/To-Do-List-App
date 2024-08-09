@@ -1,5 +1,6 @@
 package com.taskmanagement.taskservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -37,6 +38,10 @@ public class Todo {
     private String userId;
     private String category;
     private LocalDateTime reminderDate;
+
+    @Transient
+    @JsonIgnore
+    private String eventName;
 
     // Custom validation for endDate
     @Transient
