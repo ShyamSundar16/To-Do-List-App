@@ -40,11 +40,11 @@ public class Todo {
     private LocalDateTime reminderDate;
 
     @Transient
-    @JsonIgnore
     private String eventName;
 
     // Custom validation for endDate
     @Transient
+    @JsonIgnore
     public boolean isEndDateValid() {
         Boolean isValidDate = endDate.isAfter(startDate);
         if (reminderDate != null) {

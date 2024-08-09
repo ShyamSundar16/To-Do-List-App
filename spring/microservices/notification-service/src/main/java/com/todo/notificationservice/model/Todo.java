@@ -1,5 +1,6 @@
 package com.todo.notificationservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -32,11 +33,6 @@ public class Todo {
     private String eventName;
     // Custom validation for endDate
     @Transient
-    public boolean isEndDateValid() {
-        Boolean isValidDate = endDate.isAfter(startDate);
-        if (reminderDate != null) {
-            isValidDate = reminderDate.isBefore(endDate) || reminderDate.equals(endDate);
-        }
-        return isValidDate;
-    }
+    @JsonIgnore
+    public boolean endDateValid;
 }

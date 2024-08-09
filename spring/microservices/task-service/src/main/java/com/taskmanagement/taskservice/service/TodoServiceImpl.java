@@ -2,6 +2,8 @@ package com.taskmanagement.taskservice.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.taskmanagement.taskservice.model.Status;
 import com.taskmanagement.taskservice.model.Todo;
 import com.taskmanagement.taskservice.repository.TodoRepository;
@@ -24,7 +26,7 @@ public class TodoServiceImpl implements TodoService {
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
-    ObjectMapper objectMapper = new ObjectMapper();
+    ObjectMapper objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();;
     private static final String TOPIC = "todo-events";
 
     @Override

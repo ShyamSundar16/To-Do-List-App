@@ -24,7 +24,7 @@ public class CustomTaskScheduler {
     @Autowired
     private NotificationService notificationService;
 
-    @Scheduled(fixedRate = 3600000) // Check every hour
+    @Scheduled(fixedRate = 60000) // Check every hour
     private void checkReminders() {
         List<Todo> todos = todoRepository.findAll();
         LocalDateTime now = LocalDateTime.now();

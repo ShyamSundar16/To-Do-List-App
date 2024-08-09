@@ -1,7 +1,8 @@
-// src/main/java/com/taskmanagement/notificationservice/service/KafkaConsumerService.java
 package com.todo.notificationservice.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.todo.notificationservice.model.Todo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,8 @@ public class KafkaConsumerService {
 
     @KafkaListener(topics = "todo-events", groupId = "todo-group")
     public void consume(String message) {
-        ObjectMapper objectMapper = new ObjectMapper();
+        log.info("Message consumed");
+        ObjectMapper objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
         try {
             Todo todo = objectMapper.readValue(message, Todo.class);
             notificationService.sendReminder(todo.getUserId(), "Task notification",todo.getEventName()+ " task for : " + todo.getTitle());
