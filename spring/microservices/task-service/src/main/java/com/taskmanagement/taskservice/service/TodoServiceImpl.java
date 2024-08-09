@@ -9,7 +9,6 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,11 +49,6 @@ public class TodoServiceImpl implements TodoService {
             if (!todo.isEndDateValid()) {
                 throw new IllegalArgumentException("End date must be after start date");
             }
-
-            // Compute next due date if repeat interval is set
-            /*if (todo.getRepeatInterval() != null) {
-                todo.setDueDate(computeNextDueDate(todo));
-            }*/
 
             return Optional.of(todoRepository.save(todo));
         }
