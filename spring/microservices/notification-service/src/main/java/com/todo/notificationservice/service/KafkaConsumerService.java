@@ -1,4 +1,3 @@
-// src/main/java/com/taskmanagement/notificationservice/service/KafkaConsumerService.java
 package com.todo.notificationservice.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,8 +53,9 @@ public class KafkaConsumerService {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(1000));
                 for (ConsumerRecord<String, String> record : records) {
-                    // Process each message
                     try {
+                        log.info("Message consumed");
+                        ObjectMapper objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
                         Todo todo = objectMapper.readValue(record.value(), Todo.class);
                         notificationService.sendReminder(todo.getUserId(), "Task notification",todo.getEventName()+ " task for : " + todo.getTitle());
                     } catch (Exception e) {

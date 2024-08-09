@@ -1,13 +1,46 @@
-{
-  "title": "Complete project documentation",
-  "description": "Write and review the project documentation for the upcoming release.",
-  "startDate": "2023-10-01T09:00:00",
-  "endDate": "2023-10-05T17:00:00",
-  "status": "In Progress",
-  "effortRequired": 10,
-  "completed": false,
-  "userId": "user123",
-  "category": "Work",
-  "reminderDate": "2023-10-04T09:00:00",
-  "repeatInterval": "DAILY"
-}
+[
+    {
+        "title": "Complete Unit testing",
+        "description": "Complete unit testing for the test initiative.",
+        "startDate": "2024-08-09T09:00:00",
+        "endDate": "2024-08-15T17:00:00",
+        "status": "PENDING",
+        "effortRequired": 1,
+        "userId": "shyam123@gmail.com",
+        "category": "Developement",
+        "reminderDate": "2024-08-12T09:00:00"
+    },
+    {
+        "title": "Complete project documentation",
+        "description": "Write and review the project documentation for the upcoming release.",
+        "startDate": "2024-08-08T09:00:00",
+        "endDate": "2024-08-20T17:00:00",
+        "status": "PENDING",
+        "effortRequired": 10,
+        "userId": "shyam123@gmail.com",
+        "category": "Scrum",
+        "reminderDate": "2024-08-12T09:00:00"
+    },
+	    {
+        "title": "Complete Unit testing",
+        "description": "Complete unit testing for the test initiative.",
+        "startDate": "2024-08-09T09:00:00",
+        "endDate": "2024-08-15T17:00:00",
+        "status": "PENDING",
+        "effortRequired": 1,
+        "userId": "sundar123@gmail.com",
+        "category": "Developement",
+        "reminderDate": "2024-08-12T09:00:00"
+    },
+    {
+        "title": "Complete project documentation",
+        "description": "Write and review the project documentation for the upcoming release.",
+        "startDate": "2024-08-08T09:00:00",
+        "endDate": "2024-08-20T17:00:00",
+        "status": "PENDING",
+        "effortRequired": 10,
+        "userId": "sundar123@gmail.com",
+        "category": "Scrum",
+        "reminderDate": "2024-08-12T09:00:00"
+    }
+]
