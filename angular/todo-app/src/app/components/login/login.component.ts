@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
   }
 
   validateUserAndNavigate(user: AuthUser) {
-
     this.authService.authenticateUser(user).
       subscribe((res: any) => {
 
@@ -68,14 +67,8 @@ export class LoginComponent implements OnInit {
         u.valid = true;
         u.email = user.username;
         this.userService.user = u;
-        //let role: Role[] = decoded.role;
-        // if (role[0].authority == "admin") {
-        //   this.router.navigate(['/', 'admin', 'manageCompanies']);
-        // }
-        // else {
-          this.router.navigate(["task"])
-          sessionStorage.setItem("userid", user.username);
-        // }
+        this.router.navigate(["task"])
+        sessionStorage.setItem("userid", user.username);
       });
 
   }

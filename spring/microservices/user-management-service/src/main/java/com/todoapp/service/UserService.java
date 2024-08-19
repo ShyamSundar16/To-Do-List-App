@@ -38,10 +38,9 @@ public class UserService {
     @Caching(evict = {
             @CacheEvict(value = "user", allEntries = true),
             @CacheEvict(value = "users", allEntries = true)})
-    public String save(User user) throws Exception {
+    public User save(User user) throws Exception {
 
-        userRepository.save(user);
-        return "SuccessFully added";
+        return userRepository.save(user);
     }
 
     @Caching(evict = {

@@ -30,10 +30,9 @@ public class UserController {
 
     @CrossOrigin
     @PostMapping("/register")
-    public String addUser(@RequestBody User user) throws Exception {
+    public User addUser(@RequestBody User user) throws Exception {
         logger.info("Registering a new user");
-        userService.save(user);
-        return "redirect:../";
+        return userService.save(user);
     }
 
 

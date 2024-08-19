@@ -8,7 +8,7 @@ import { User } from "../models/User";
 export class AuthUserService{
     private u = new AuthUser();
 
-    private authenticationurl: string = "http://localhost:8989/usermangement/authenticate/token"
+    private authenticationurl: string = "http://localhost:8989/usermanagement/authenticate/token"
 
     constructor(private httpClient: HttpClient){
 
