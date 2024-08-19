@@ -18,7 +18,7 @@ public class SwaggerConfiguration {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.paths(PathSelectors.ant("/users/**"))
-				.apis(RequestHandlerSelectors.basePackage("com.fseflightapp"))
+				.apis(RequestHandlerSelectors.basePackage("com.fsetodoapp"))
 				.build()
 				.apiInfo(apiInfo())
 				;

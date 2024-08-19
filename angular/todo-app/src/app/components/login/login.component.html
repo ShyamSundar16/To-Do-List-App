@@ -1,0 +1,41 @@
+<div class="container">
+    <form [formGroup]="signupForm" (ngSubmit)="signUpUser()">
+        <div class="col">
+            <input type="text" placeholder="Name" name="name" formControlName="name" required>
+            <input type="text" #signupemail placeholder="Email" name="signupemail" formControlName="email" required>
+            <p *ngIf = "signupForm.controls.email.dirty && !!signupForm.controls.email.errors">
+                <span *ngIf = "!!signupForm.controls.email.errors.required" class="error">Email cannot be empty.</span>
+                <span *ngIf = "!!signupForm.controls.email.errors.email" class="error">Invalid email.</span>
+            </p>
+            <input type="number" placeholder="Phone number" name="phone" formControlName="phone" required>
+            <input type="password" placeholder="Password" name="password" formControlName="password" required>
+            <div class="clearfix">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn">Sign Up</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="vl">
+        <span class="vl-innertext">or</span>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="getLogin()">
+        <div class="row">
+            <div class="col">
+                <div class="hide-md-lg">
+                    <p>Or sign in manually:</p>
+                </div>
+                <input type="text" #email placeholder="Email" name="email" formControlName="email" required>
+                <p *ngIf = "loginForm.controls.email.dirty && !!loginForm.controls.email.errors">
+                    <span *ngIf = "!!loginForm.controls.email.errors.required" class="error">Email cannot be empty.</span>
+                    <span *ngIf = "!!loginForm.controls.email.errors.email" class="error">Invalid email.</span>
+                </p>
+                <input type="password" placeholder="Password" name="password" formControlName="password" required>
+
+                <button [disabled]="loginForm.invalid" type="submit"  class="signupbtn">Login</button>
+
+            </div>
+
+        </div>
+    </form>
+</div>
