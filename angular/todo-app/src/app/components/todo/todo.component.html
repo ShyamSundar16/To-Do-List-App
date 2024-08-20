@@ -1,0 +1,17 @@
+<!-- <li class="list-group-item" [ngClass]="toggleClass()"> -->
+    <!-- <li class="list-group-item" [ngClass]="{'list-group-item-success' : completed, 'border-primary' : completed}"> -->
+    <!-- <li class="list-group-item" [ngStyle]="{'background-color: 'completed? 'red : green'}"> -->
+    <!-- <li class="list-group-item" [ngClass]="completed ? 'list-group-item-success'  : 'list-group-item-danger' "> -->
+    <!-- <li class="list-group-item" [class.list-group-item-success]="completed"> -->
+    <div class="form-check d-inline">
+        <input type="checkbox" class="form-check-input" id="complete" (change)="onChange()">
+        <label for="complete" class="form-check-label lead">{{todoInput.title}}</label>
+    </div>
+    <div class="float-right">
+        <span class="mx-3">{{todoInput.startDate}}</span>
+        <!-- <i class="fa fa-heart mx-3 btn" (click)='isFavorite()' [ngClass]="todoInput.isFavorite? 'text-danger' : '' "></i> -->
+        <!-- <button class="btn btn-danger btn-sm mx-3" (click)="onCliCk($event)">x</button> -->
+        <!-- <button class="btn btn-danger btn-sm mx-3" (click)="todoService.deleteTodo(todoInput)">x</button> -->
+        <button class="btn btn-danger btn-sm mx-3" (click)="deleteTodo(todoInput)">x</button>
+    </div>
+<!-- </li> -->

@@ -1,0 +1,28 @@
+<!-- <p>todo-list works!</p>
+<ul *ngFor="let todo of todoList">
+    // | date is pipe to formate date
+<li *ngIf="todo.title !== 'Todo One'">{{todo.title}} {{todo.date | date}}</li>
+</ul> -->
+<h1>Hi Todo</h1>
+<div class="card shadow" *ngIf="viewList">
+    <h5 class="card-header">My Todo List</h5>
+    <div class="card-body">
+        <ul class="list-group" *ngFor="let todo of todoService.todoList">
+
+            <app-todo [todoInput]="todo"></app-todo>
+
+        </ul>
+    </div>
+</div>
+
+<div class="card shadow" *ngIf="!viewList">
+    <h5 class="card-header">My Todo List</h5>
+    <div class="card-body">
+        <!-- <ul class="list-group" *ngFor="let todo of todoService.todoList"> -->
+        <ul class="list-group" *ngFor="let todo of todoService.fav">
+
+            <app-todo [todoInput]="todo"></app-todo>
+
+        </ul>
+    </div>
+</div>

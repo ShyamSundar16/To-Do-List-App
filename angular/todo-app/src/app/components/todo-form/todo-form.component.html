@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="card shadow text-center mb-5">
+        <div class="card-header bg-primary text-light">
+            <h5>Add Task</h5>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="addTodoForm" (ngSubmit)="addTodo()">
+                <div class="form-group">
+                    <input type="text" placeholder="Title" name="Title" class="form-control mb-3" formControlName="title" required>
+                    <input type="text" placeholder="Description" class="form-control mb-3" name="Description" formControlName="description" required>
+                    <div class="form-row">
+                        <input type="number" placeholder="Effort Required" class="form-control mb-3" name="Effort" formControlName="effortRequired" required>
+                        <select class="form-control mb-3" name="Status" formControlName="status" required>
+                            <option value="" disabled selected>Select Status</option>
+                            <option value="pending">Pending</option>
+                            <option value="in-progress">In Progress</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <mat-form-field class="w-100 mb-3">
+                            <mat-label>Start date</mat-label>
+                            <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #startPicker></mat-datepicker>
+                          </mat-form-field>
+                          
+                          <mat-form-field class="w-100 mb-3">
+                            <mat-label>End date</mat-label>
+                            <input matInput [matDatepicker]="endPicker" formControlName="endDate" [matDatepickerFilter]="endDateFilter">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #endPicker></mat-datepicker>
+                          </mat-form-field>
+                          
+                          <mat-form-field class="w-100 mb-3">
+                            <mat-label>Reminder</mat-label>
+                            <input matInput [matDatepicker]="reminderPicker" formControlName="reminderDate" [matDatepickerFilter]="reminderDateFilter">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="reminderPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #reminderPicker></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                    <input type="text" placeholder="Category" class="form-control mb-3" name="category" formControlName="category">
+                </div>
+                <!-- <button class="btn btn-primary">ADD</button> -->
+                <button type="submit" style="width: 50%;" class="btn btn-primary"><i class="fa fa-fw fa-check"></i>Add</button>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,38 +1,61 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http'; // Import withFetch
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
-import { TaskComponent } from './components/task/task.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { TodoComponent } from './components/todo/todo.component';
+import { TodoFormComponent } from './components/todo-form/todo-form.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
-  { path: "task", component: TaskComponent },
+  { path: "todo", component: TodoListComponent },
+  {path: "add", component: TodoFormComponent},
+  {path: "list", component: TodoListComponent},
+  {path: "favorite", component: TodoListComponent},
   { path: '', redirectTo: "/login", pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent },
+  { path: '**', component: PageNotFoundComponent },
 
 ]
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NotFoundComponent,
-    TaskComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    TodoComponent,
+    TodoFormComponent,
+    TodoListComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes), ReactiveFormsModule,HttpClientModule
+    FormsModule,
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes), ReactiveFormsModule,HttpClientModule,
+    ToastrModule.forRoot(),CommonModule,MatFormFieldModule, MatInputModule,
+     MatDatepickerModule, MatIconModule
   ],
   providers: [
-    provideClientHydration(),provideHttpClient(withFetch())
+    provideClientHydration(),provideHttpClient(withFetch()), provideAnimationsAsync(),provideNativeDateAdapter()
   ],
   bootstrap: [AppComponent]
 })

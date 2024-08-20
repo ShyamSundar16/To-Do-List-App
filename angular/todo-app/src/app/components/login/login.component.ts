@@ -5,8 +5,6 @@ import { AuthUser } from '../../models/AuthUser';
 import { User } from '../../models/User';
 import { AuthUserService } from '../../services/auth.user.service';
 import { UserService } from '../../services/user.service';
-import { Token } from '@angular/compiler';
-import { Role } from '../../models/Role';
 
 @Component({
   selector: 'app-login',
@@ -67,7 +65,7 @@ export class LoginComponent implements OnInit {
         u.valid = true;
         u.email = user.username;
         this.userService.user = u;
-        this.router.navigate(["task"])
+        this.router.navigate(["todo"])
         sessionStorage.setItem("userid", user.username);
       });
 

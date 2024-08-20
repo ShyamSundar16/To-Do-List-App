@@ -1,12 +1,23 @@
 <header>
     <div class="header-container">
       <h1>Todo App</h1>
-      <nav>
+      <nav class="navbar navbar-expand-lg navbar-light ml-auto">
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Tasks</a></li>
-          <li><a href="#">About</a></li>
-        </ul>
+          <li>
+            <a class="nav-item nav-link d-flex align-items-center" routerLink="/add" routerLinkActive="text-danger">
+              <mat-icon class="mr-2">add</mat-icon>Add
+            </a>
+          </li>   
+          <li>
+            <a class="nav-item nav-link d-flex align-items-center" routerLink="/list" routerLinkActive="text-danger">
+              <mat-icon class="mr-2">list</mat-icon> List
+            </a>
+          </li>
+          <li>
+            <a class="nav-item nav-link d-flex align-items-center" routerLink="/favorite" routerLinkActive="text-danger">
+              <mat-icon class="mr-2">favorite</mat-icon> Favorites
+            </a>
+          </li>        </ul>
       </nav>
     </div>
   </header>
