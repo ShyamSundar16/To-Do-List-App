@@ -3,6 +3,7 @@ import { TodoService } from '../../services/todo.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { Todo } from '../../models/Todo';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-todo-form',
@@ -15,7 +16,7 @@ export class TodoFormComponent implements OnInit {
 
   todo = '';
 
-  constructor(private fb: FormBuilder, public todoService: TodoService) {
+  constructor(private fb: FormBuilder, public todoService: TodoService, public userService: UserService) {
     this.addTodoForm = new FormGroup({
       title: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required]),
@@ -66,8 +67,8 @@ export class TodoFormComponent implements OnInit {
 
   addTodo(){
     console.log(this.addTodoForm.value);
-    // this.todoService.saveTask(this.addTodoForm.value).subscribe((data) => {
-    //   console.log(data);
-    // });
+    this.todoService.saveTask(this.addTodoForm.value).subscribe((data) => {
+      console.log(data);
+    });
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Todo } from "../models/Todo";
+import { UserService } from "./user.service";
 
 @Injectable({"providedIn": "root"})
 export class TodoService{
@@ -10,7 +11,7 @@ export class TodoService{
     private url: string = "http://localhost:8989/taskservice/api/v1/user";
     // private url: string = "http://ec2-3-142-134-192.us-east-2.compute.amazonaws.com:8989/api/usermangement/users";
 
-    constructor(private httpClient: HttpClient){
+    constructor(private httpClient: HttpClient, public userService: UserService){
     }
 
     public set todo(newT:Todo){
@@ -31,6 +32,9 @@ export class TodoService{
     }
 
     saveTask(todo: Todo) {
+        todo.userId = this.userService.user.email;
+        console.log("Before Save");
+        console.log(todo);
         return this.httpClient.post(this.url+"/add-list", todo);
     }
     

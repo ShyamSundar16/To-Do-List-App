@@ -7,19 +7,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1/user")
 @Tag(name = "Todo Controller", description = "API for managing To-Do items")
@@ -28,6 +21,7 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
+    @CrossOrigin
     @PostMapping("/add-list")
     @Operation(summary = "Add a new To-Do item", description = "Creates a new To-Do item and saves it to the database")
     public ResponseEntity<Todo> addTodo(@RequestBody Todo todo) {
@@ -35,6 +29,7 @@ public class TodoController {
         return ResponseEntity.ok(savedTodo);
     }
 
+    @CrossOrigin
     @PutMapping("/update/{id}")
     @Operation(summary = "Update an existing To-Do item", description = "Updates the details of an existing To-Do item by its ID")
     public ResponseEntity<Todo> updateTodo(@PathVariable String id, @RequestBody Todo todoDetails) {
@@ -42,6 +37,7 @@ public class TodoController {
         return updatedTodo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @CrossOrigin
     @GetMapping("/list/all")
     @Operation(summary = "Get all To-Do items", description = "Retrieves a list of all To-Do items")
     public ResponseEntity<List<Todo>> getAllTodos() {
@@ -49,6 +45,7 @@ public class TodoController {
         return ResponseEntity.ok(todos);
     }
 
+    @CrossOrigin
     @GetMapping("/list/{id}")
     @Operation(summary = "Get a To-Do item by ID", description = "Retrieves a To-Do item by its ID")
     public ResponseEntity<Todo> getTodoById(@PathVariable String id) {
@@ -56,12 +53,15 @@ public class TodoController {
         return todo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @CrossOrigin
     @DeleteMapping("/list/{id}")
     @Operation(summary = "Delete a To-Do item by ID", description = "Deletes a To-Do item by its ID")
     public ResponseEntity<Void> deleteTodoById(@PathVariable String id) {
         todoService.deleteTodoById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @CrossOrigin
     @GetMapping("/{userId}")
     @Operation(summary = "Get To-Do items by User ID", description = "Retrieves a list of To-Do items for a specific user, with optional filters for status and category")
     public ResponseEntity<List<Todo>> getTodosByUserId(

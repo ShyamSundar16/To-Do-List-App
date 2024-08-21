@@ -1,4 +1,5 @@
 <div class="container">
+    <!-- <p>Welcome {{userService.user.email}}</p> -->
     <div class="card shadow text-center mb-5">
         <div class="card-header bg-primary text-light">
             <h5>Add Task</h5>
@@ -12,9 +13,9 @@
                         <input type="number" placeholder="Effort Required" class="form-control mb-3" name="Effort" formControlName="effortRequired" required>
                         <select class="form-control mb-3" name="Status" formControlName="status" required>
                             <option value="" disabled selected>Select Status</option>
-                            <option value="pending">Pending</option>
-                            <option value="in-progress">In Progress</option>
-                            <option value="completed">Completed</option>
+                            <option value="PENDING">Pending</option>
+                            <option value="IN_PROGRESS">In Progress</option>
+                            <option value="COMPLETED">Completed</option>
                         </select>
                     </div>
                     <div class="form-row">
