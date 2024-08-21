@@ -1,31 +1,26 @@
 <div class="card shadow">
     <h5 class="card-header">My Todo List</h5>
     <div class="card-body">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-            <!-- Define columns -->
-            <ng-container matColumnDef="title">
-                <th mat-header-cell *matHeaderCellDef> Title </th>
-                <td mat-cell *matCellDef="let task"> {{task.title}} </td>
-            </ng-container>
-            <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef> Description </th>
-                <td mat-cell *matCellDef="let task"> {{task.description}} </td>
-            </ng-container>
-            <ng-container matColumnDef="category">
-                <th mat-header-cell *matHeaderCellDef> Category </th>
-                <td mat-cell *matCellDef="let task"> {{task.category}} </td>
-            </ng-container>
-            <ng-container matColumnDef="effortRequired">
-                <th mat-header-cell *matHeaderCellDef> Effort </th>
-                <td mat-cell *matCellDef="let task"> {{task.effortRequired}} </td>
-            </ng-container>
-            <ng-container matColumnDef="status">
-                <th mat-header-cell *matHeaderCellDef> Status </th>
-                <td mat-cell *matCellDef="let task"> {{task.status}} </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <div class="card-container">
+            <div *ngFor="let task of dataSource.data" class="mat-elevation-z8">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>{{ task.title }}</mat-card-title>
+                        <mat-card-subtitle>
+                            <mat-chip-list>
+                                <mat-chip color="primary" selected>{{ task.category }}</mat-chip>
+                            </mat-chip-list>
+                        </mat-card-subtitle>
+                        <mat-icon *ngIf="task.status === 'COMPLETED'" color="primary">check_circle</mat-icon>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p>{{ task.description }}</p>
+                        <p><strong>Effort:</strong> {{ task.effortRequired }}</p>
+                        <p><strong>Status:</strong> {{ task.status }}</p>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
 </div>
