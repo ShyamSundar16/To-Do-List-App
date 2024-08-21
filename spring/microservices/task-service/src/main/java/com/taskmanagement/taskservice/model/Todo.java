@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -25,10 +26,10 @@ public class Todo {
     private String description;
 
     @NotNull(message = "Task start date is mandatory")
-    private LocalDateTime startDate;
+    private Date startDate;
 
     @NotNull(message = "Task end date is mandatory")
-    private LocalDateTime endDate;
+    private Date endDate;
 
     @NotNull(message = "Task status is mandatory")
     private Status status;
@@ -37,19 +38,8 @@ public class Todo {
     private int effortRequired;
     private String userId;
     private String category;
-    private LocalDateTime reminderDate;
+    private Date reminderDate;
 
     @Transient
     private String eventName;
-
-    // Custom validation for endDate
-    @Transient
-    @JsonIgnore
-    public boolean isEndDateValid() {
-        Boolean isValidDate = endDate.isAfter(startDate);
-        if (reminderDate != null) {
-            isValidDate = reminderDate.isBefore(endDate) || reminderDate.equals(endDate);
-        }
-        return isValidDate;
-    }
 }

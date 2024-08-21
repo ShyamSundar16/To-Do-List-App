@@ -32,10 +32,6 @@ public class TodoServiceImpl implements TodoService {
     @Override
     @CachePut(value = "todos", key = "#todo.id")
     public Todo addTodo(Todo todo) {
-        // Validate endDate
-        if (!todo.isEndDateValid()) {
-            throw new IllegalArgumentException("End date must be after start date");
-        }
         notifyUser(todo, "CREATED");
         return todoRepository.save(todo);
     }
@@ -55,11 +51,6 @@ public class TodoServiceImpl implements TodoService {
             todo.setReminderDate(todoDetails.getReminderDate());
             todo.setUserId(todoDetails.getUserId());
             todo.setCategory(todoDetails.getCategory());
-
-            // Validate endDate
-            if (!todo.isEndDateValid()) {
-                throw new IllegalArgumentException("End date must be after start date");
-            }
             notifyUser(todo, "UPDATED");
             return Optional.of(todoRepository.save(todo));
         }

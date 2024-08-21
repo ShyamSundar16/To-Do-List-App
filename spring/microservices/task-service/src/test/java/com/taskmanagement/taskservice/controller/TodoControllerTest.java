@@ -18,7 +18,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,13 +54,13 @@ public class TodoControllerTest {
         jsonContent = new String(Files.readAllBytes(path));
         todoObj.setTitle("Complete project documentation");
         todoObj.setDescription("Write and review the project documentation for the upcoming release.");
-        todoObj.setStartDate(LocalDateTime.parse("2023-10-01T09:00:00"));
-        todoObj.setEndDate(LocalDateTime.parse("2023-10-05T17:00:00"));
+        todoObj.setStartDate(Date.from(Instant.now()));
+        todoObj.setEndDate(Date.from(Instant.now()));
         todoObj.setStatus(Status.PENDING);
         todoObj.setEffortRequired(10);
         todoObj.setUserId("user123");
         todoObj.setCategory("Work");
-        todoObj.setReminderDate(LocalDateTime.parse("2023-10-04T09:00:00"));
+        todoObj.setReminderDate(Date.from(Instant.now()));
     }
 
     @Test
@@ -84,13 +86,13 @@ public class TodoControllerTest {
         updatedTodo.setId(id);
         updatedTodo.setTitle("Complete project documentation");
         updatedTodo.setDescription("Write and review the project documentation for the upcoming release.");
-        updatedTodo.setStartDate(LocalDateTime.parse("2023-10-01T09:00:00"));
-        updatedTodo.setEndDate(LocalDateTime.parse("2023-10-05T17:00:00"));
+        updatedTodo.setStartDate(Date.from(Instant.now()));
+        updatedTodo.setEndDate(Date.from(Instant.now()));
         updatedTodo.setStatus(Status.PENDING);
         updatedTodo.setEffortRequired(10);
         updatedTodo.setUserId("user123");
         updatedTodo.setCategory("Work");
-        updatedTodo.setReminderDate(LocalDateTime.parse("2023-10-04T09:00:00"));
+        updatedTodo.setReminderDate(Date.from(Instant.now()));
 
         doReturn(Optional.of(updatedTodo)).when(todoService).updateTodo(eq(id), any(Todo.class));
 

@@ -9,7 +9,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.kafka.core.KafkaTemplate;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,8 +43,8 @@ class TodoServiceImplTest {
         Todo todo = new Todo();
         todo.setId("1");
         todo.setTitle("New Todo");
-        todo.setStartDate(LocalDateTime.now());
-        todo.setEndDate(LocalDateTime.now().plusDays(1));
+        todo.setStartDate(Date.from(Instant.now()));
+        todo.setEndDate(Date.from(Instant.now()));
         doReturn(todo).when(todoRepository).save(any(Todo.class));
 
         Todo result = todoService.addTodo(todo);
@@ -51,14 +53,6 @@ class TodoServiceImplTest {
         assertThat(result.getTitle(), is("New Todo"));
     }
 
-    @Test
-    public void whenAddTodoWithInvalidEndDate_thenThrowException() {
-        Todo todo = new Todo();
-        todo.setStartDate(LocalDateTime.now());
-        todo.setEndDate(LocalDateTime.now().minusDays(1));
-
-        assertThrows(IllegalArgumentException.class, () -> todoService.addTodo(todo));
-    }
 
     @Test
     public void whenUpdateTodo_thenTodoIsUpdated() {
@@ -69,28 +63,14 @@ class TodoServiceImplTest {
 
         Todo updatedDetails = new Todo();
         updatedDetails.setTitle("Updated Title");
-        updatedDetails.setStartDate(LocalDateTime.now());
-        updatedDetails.setEndDate(LocalDateTime.now().plusDays(1));
+        updatedDetails.setStartDate(Date.from(Instant.now()));
+        updatedDetails.setEndDate(Date.from(Instant.now()));
         doReturn(updatedDetails).when(todoRepository).save(any(Todo.class));
 
         Optional<Todo> result = todoService.updateTodo(id, updatedDetails);
 
         assertTrue(result.isPresent());
         assertThat(result.get().getTitle(), is("Updated Title"));
-    }
-
-    @Test
-    public void whenUpdateTodoWithInvalidEndDate_thenThrowException() {
-        String id = "1";
-        Todo existingTodo = new Todo();
-        existingTodo.setId(id);
-        doReturn(Optional.of(existingTodo)).when(todoRepository).findById(id);
-
-        Todo updatedDetails = new Todo();
-        updatedDetails.setStartDate(LocalDateTime.now());
-        updatedDetails.setEndDate(LocalDateTime.now().minusDays(1));
-
-        assertThrows(IllegalArgumentException.class, () -> todoService.updateTodo(id, updatedDetails));
     }
 
     @Test

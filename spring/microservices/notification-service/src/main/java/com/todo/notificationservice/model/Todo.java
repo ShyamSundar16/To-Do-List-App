@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -20,19 +21,15 @@ public class Todo {
 
     private String description;
 
-    private LocalDateTime startDate;
+    private Date startDate;
 
-    private LocalDateTime endDate;
+    private Date endDate;
 
     private Status status;
 
     private int effortRequired;
     private String userId;
     private String category;
-    private LocalDateTime reminderDate;
+    private Date reminderDate;
     private String eventName;
-    // Custom validation for endDate
-    @Transient
-    @JsonIgnore
-    public boolean endDateValid;
 }
