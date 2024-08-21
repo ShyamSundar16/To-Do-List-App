@@ -14,7 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styles: []
 })
 export class TodoListComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'title', 'description'];
+  displayedColumns: string[] = ['title', 'description', 'effortRequired', 'category', 'status'];
   dataSource = new MatTableDataSource<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
