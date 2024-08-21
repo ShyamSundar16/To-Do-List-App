@@ -68,7 +68,7 @@ export class TodoFormComponent implements OnInit {
   addTodo(){
     console.log(this.addTodoForm.value);
     this.todoService.saveTask(this.addTodoForm.value).subscribe((data) => {
-      console.log(data);
+      this.addTodoForm.reset();
     });
   }
 }

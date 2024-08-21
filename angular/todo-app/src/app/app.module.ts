@@ -22,6 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 
 
 
@@ -52,7 +54,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes), ReactiveFormsModule,HttpClientModule,
     ToastrModule.forRoot(),CommonModule,MatFormFieldModule, MatInputModule,
-     MatDatepickerModule, MatIconModule
+     MatDatepickerModule, MatIconModule,MatTableModule, MatPaginatorModule
   ],
   providers: [
     provideClientHydration(),provideHttpClient(withFetch()), provideAnimationsAsync(),provideNativeDateAdapter()
