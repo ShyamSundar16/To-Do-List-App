@@ -12,9 +12,12 @@
     <mat-label>Effort</mat-label>
     <input matInput [(ngModel)]="data.task.effortRequired">
   </mat-form-field>
-  <mat-form-field>
-    <mat-label>StartDate</mat-label>
-    <input matInput [(ngModel)]="data.task.startDate">
+  <mat-form-field class="w-100 mb-3">
+    <mat-label>Start date</mat-label>
+    <input matInput [matDatepicker]="startPicker" [(ngModel)]="data.task.startDate">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Status</mat-label>

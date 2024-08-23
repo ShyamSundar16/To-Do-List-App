@@ -6,8 +6,8 @@ import { Todo } from '../../models/Todo';
 
 @Component({
   selector: 'app-favorite-tasks',
-  templateUrl: './favorite-tasks.component.html',
-  styleUrl: './favorite-tasks.component.scss'
+  //templateUrl: './favorite-tasks.component.html',
+  template: `<app-todo-list [tasks] = "favoriteTasks"></app-todo-list>`
 })
 export class FavoriteTasksComponent implements OnInit {
   favoriteTasks: Todo[] = [];

@@ -29,10 +29,10 @@
                     <mat-card-actions>
                         <div class="date-row">
                             <button mat-icon-button (click)="toggleSelected(task)">
-                                <mat-icon *ngIf="task.selected" aria-label="Example icon-button with a heart icon">
+                                <mat-icon *ngIf="task.isFavorite" aria-label="Example icon-button with a heart icon">
                                   favorite
                                 </mat-icon>
-                                <mat-icon *ngIf="!task.selected" aria-label="Example icon-button with a heart icon">
+                                <mat-icon *ngIf="!task.isFavorite" aria-label="Example icon-button with a heart icon">
                                   favorite_border
                                 </mat-icon>
                               </button>
