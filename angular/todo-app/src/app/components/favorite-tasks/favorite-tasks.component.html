@@ -1,1 +1,46 @@
-<p>favorite-tasks works!</p>
+<div class="card shadow">
+    <div class="card-body">
+        <div class="card-container">
+            <div *ngFor="let task of paginatedTasks" class="mat-elevation-z8">
+                <mat-card [ngClass]="{
+                    'completed': task.status === 'COMPLETED',
+                    'in-progress': task.status === 'IN_PROGRESS',
+                    'pending': task.status === 'PENDING'
+                }"> 
+                    <mat-card-header>
+                        <mat-card-title><strong>{{ task.title }}</strong></mat-card-title>
+                        <mat-card-subtitle class="align-left">
+                            <span class="category-label">{{ task.category }}</span>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="date-row">
+                            <p>{{ task.description }}</p>
+                        </div>
+                        <div class="date-row">
+                            <p>Start Date: {{ task.startDate }}</p>
+                            <p>End Date: {{ task.endDate }}</p>
+                        </div>
+                        <div class="date-row">
+                            <p>Effort: {{ task.effortRequired }}</p>
+                            <p><strong>Status:</strong> {{ task.status }}</p>  
+                        </div>                
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <div class="date-row">
+                            <button mat-icon-button (click)="toggleSelected(task)">
+                                <mat-icon *ngIf="task.isFavorite" aria-label="Example icon-button with a heart icon">
+                                  favorite
+                                </mat-icon>
+                                <mat-icon *ngIf="!task.isFavorite" aria-label="Example icon-button with a heart icon">
+                                  favorite_border
+                                </mat-icon>
+                              </button>
+                    </div>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </div>
+        <mat-paginator [pageSizeOptions]="[6]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>
