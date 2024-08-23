@@ -15,14 +15,14 @@
   <form [formGroup]="taskForm">
     <mat-form-field class="w-100 mb-3">
       <mat-label>Start date</mat-label>
-      <input matInput [matDatepicker]="startPicker" formControlName="startDate">
+      <input matInput [matDatepicker]="startPicker" formControlName="startDate" [(ngModel)]="data.task.startDate">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="startPicker"></mat-datepicker-toggle>
       <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="w-100 mb-3">
       <mat-label>End date</mat-label>
-      <input matInput [matDatepicker]="endPicker" formControlName="endDate">
+      <input matInput [matDatepicker]="endPicker" formControlName="endDate" [(ngModel)]="data.task.endDate">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="endPicker"></mat-datepicker-toggle>
       <mat-datepicker #endPicker></mat-datepicker>
@@ -32,7 +32,7 @@
     </mat-form-field>
     <mat-form-field class="w-100 mb-3">
       <mat-label>Reminder</mat-label>
-      <input matInput [matDatepicker]="reminderPicker" formControlName="reminderDate">
+      <input matInput [matDatepicker]="reminderPicker" formControlName="reminderDate" [(ngModel)]="data.task.reminderDate">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matIconSuffix [for]="reminderPicker"></mat-datepicker-toggle>
       <mat-datepicker #reminderPicker></mat-datepicker>
