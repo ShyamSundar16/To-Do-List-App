@@ -52,6 +52,7 @@ public class TodoServiceImpl implements TodoService {
             todo.setUserId(todoDetails.getUserId());
             todo.setCategory(todoDetails.getCategory());
             notifyUser(todo, "UPDATED");
+            todo.setIsFavorite(todoDetails.getIsFavorite());
             return Optional.of(todoRepository.save(todo));
         }
         return Optional.empty();

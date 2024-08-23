@@ -6,4 +6,51 @@
 
 .mat-card {
     width: 100%;
+    position: relative;
+}
+
+.category-label {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #424242;
+}
+
+.align-left {
+    text-align: left;
+    display: block; /* Ensure the subtitle takes the full width */
+}
+
+/* Status-based styles */
+.completed {
+    background-color: #d4edda; /* Light green */
+    border-left: 5px solid #28a745; /* Green border */
+}
+
+.in-progress {
+    background-color: #d1ecf1; /* Light blue */
+    border-left: 5px solid #f4e007; /* Blue border */
+}
+
+.pending {
+    background-color: #f8d7da; /* Light red */
+    border-left: 5px solid #dc3545; /* Red border */
+}
+
+.date-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date-row p {
+    margin: 0 7px;
+}
+.edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 8px;
 }

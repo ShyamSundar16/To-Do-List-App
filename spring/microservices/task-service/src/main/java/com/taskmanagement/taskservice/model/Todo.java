@@ -39,6 +39,7 @@ public class Todo {
     private String userId;
     private String category;
     private Date reminderDate;
+    private Boolean isFavorite;
 
     @Transient
     private String eventName;

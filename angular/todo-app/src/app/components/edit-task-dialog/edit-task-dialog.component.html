@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Edit Task</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="data.task.title" disabled>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="data.task.description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Effort</mat-label>
+    <input matInput [(ngModel)]="data.task.effortRequired">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>StartDate</mat-label>
+    <input matInput [(ngModel)]="data.task.startDate">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select [(value)]="data.task.status">
+      <mat-option value="COMPLETED">Completed</mat-option>
+      <mat-option value="IN_PROGRESS">In Progress</mat-option>
+      <mat-option value="PENDING">Pending</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.task">Save</button>
+</div>

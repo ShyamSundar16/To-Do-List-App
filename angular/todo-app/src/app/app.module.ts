@@ -20,10 +20,14 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatOptionModule, provideNativeDateAdapter } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { FavoriteTasksComponent } from './components/favorite-tasks/favorite-tasks.component';
 
 
 
@@ -32,7 +36,7 @@ const routes: Routes = [
   { path: "todo", component: TodoListComponent },
   {path: "add", component: TodoFormComponent},
   {path: "list", component: TodoListComponent},
-  {path: "favorite", component: TodoListComponent},
+  {path: "favorite", component: FavoriteTasksComponent},
   { path: '', redirectTo: "/login", pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 
@@ -46,15 +50,28 @@ const routes: Routes = [
     TodoComponent,
     TodoFormComponent,
     TodoListComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EditTaskDialogComponent,
+    FavoriteTasksComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(routes), ReactiveFormsModule,HttpClientModule,
-    ToastrModule.forRoot(),CommonModule,MatFormFieldModule, MatInputModule,
-     MatDatepickerModule, MatIconModule,MatTableModule, MatPaginatorModule
+    RouterModule.forRoot(routes),
+    ReactiveFormsModule,
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatOptionModule,
+    MatDatepickerModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatSelectModule
   ],
   providers: [
     provideClientHydration(),provideHttpClient(withFetch()), provideAnimationsAsync(),provideNativeDateAdapter()
