@@ -41,16 +41,18 @@
 
 .date-row {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
-.date-row p {
-    margin: 0 7px;
+.task-title {
+    flex-grow: 1;
+    margin-right: 16px; /* Adjust the spacing as needed */
 }
 .edit-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 8px;
+    margin-right: 8px; /* Adjust the spacing as needed */
+}
+
+.favorite-button {
+    margin-right: 0; /* No margin needed */
 }

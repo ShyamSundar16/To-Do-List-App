@@ -71,8 +71,8 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatSelectModule
-  ],
+    MatSelectModule,
+    MatButtonModule  ],
   providers: [
     provideClientHydration(),provideHttpClient(withFetch()), provideAnimationsAsync(),provideNativeDateAdapter()
   ],

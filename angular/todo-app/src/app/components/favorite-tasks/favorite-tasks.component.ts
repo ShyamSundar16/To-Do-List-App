@@ -47,7 +47,9 @@ export class FavoriteTasksComponent implements OnInit, AfterViewInit {
     //   { id: 5, title: 'Task 5', description: 'Description for Task 5' , effortRequired: 1, category: 'Developement', status: 'PENDING' , startDate: '21/08/24', endDate: '29/08/24', isFavorite: false}
     // ];
     
-    // this.dataSource.data = sampleTasks;
+    // const favoriteTasks = sampleTasks.filter(task => task.isFavorite);
+
+    // this.dataSource.data = favoriteTasks;
     // this.updatePaginatedTasks();
   
     this.todoService.getTaskByUserId(this.userService.user.email).subscribe((res: any) => {
@@ -72,7 +74,9 @@ export class FavoriteTasksComponent implements OnInit, AfterViewInit {
   toggleSelected(task) {
     task.isFavorite = !task.isFavorite;
     this.todoService.updateTask(task).subscribe((res: any) => {
-       console.log(res);
+       if(!task.isFavorite){
+        this.getTasks();
+       }
     });
   }
   

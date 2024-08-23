@@ -8,25 +8,42 @@
                     'pending': task.status === 'PENDING'
                 }"> 
                     <mat-card-header>
-                        <mat-card-title><strong>{{ task.title }}</strong></mat-card-title>
+                        
+                        <mat-card-actions>
+                            <div class="date-row">
+                                <mat-card-title class="task-title"><strong>{{ task.title }}</strong></mat-card-title>
+                                <button mat-icon-button color="primary" (click)="editTask(task)" class="edit-button">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button color="warn" (click)="toggleSelected(task)" class="favorite-button">
+                                    <mat-icon *ngIf="task.isFavorite" aria-label="Example icon-button with a heart icon">
+                                        favorite
+                                    </mat-icon>
+                                    <mat-icon *ngIf="!task.isFavorite" aria-label="Example icon-button with a heart icon">
+                                        favorite_border
+                                    </mat-icon>
+                                </button>
+                            </div>
+                        </mat-card-actions>
                         <mat-card-subtitle class="align-left">
                             <span class="category-label">{{ task.category }}</span>
                         </mat-card-subtitle>
+                        
                     </mat-card-header>
                     <mat-card-content>
                         <div class="date-row">
                             <p>{{ task.description }}</p>
                         </div>
                         <div class="date-row">
-                            <p>Start Date: {{ task.startDate }}</p>
-                            <p>End Date: {{ task.endDate }}</p>
+                            <p>Start Date: {{ task.startDate | date:'yyyy-MM-dd' }}</p>
+                            <p>End Date: {{ task.endDate | date:'yyyy-MM-dd' }}</p>
                         </div>
                         <div class="date-row">
                             <p>Effort: {{ task.effortRequired }}</p>
                             <p><strong>Status:</strong> {{ task.status }}</p>  
                         </div>                
                     </mat-card-content>
-                    <mat-card-actions>
+                    <!-- <mat-card-actions>
                         <div class="date-row">
                             <button mat-icon-button (click)="toggleSelected(task)">
                                 <mat-icon *ngIf="task.isFavorite" aria-label="Example icon-button with a heart icon">
@@ -41,7 +58,7 @@
                             Edit
                         </button>
                     </div>
-                    </mat-card-actions>
+                    </mat-card-actions> -->
                 </mat-card>
             </div>
         </div>

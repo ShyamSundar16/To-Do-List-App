@@ -59,14 +59,14 @@ export class TodoListComponent implements OnInit, AfterViewInit {
   }
   getTasks() {
     // const sampleTasks = [
-    //   { id: 1, title: 'Task 1', description: 'Description for Task 1', effortRequired: 1, category: 'Developement', status: 'IN_PROGRESS', startDate: '21/08/24', endDate: '29/08/24', isFavorite: true },
-    //   { id: 2, title: 'Task 2', description: 'Description for Task 2' , effortRequired: 1, category: 'Developement', status: 'COMPLETED', startDate: '21/08/24', endDate: '29/08/24', isFavorite: false },
-    //   { id: 3, title: 'Task 3', description: 'Description for Task 3' , effortRequired: 1, category: 'Developement', status: 'PENDING' , startDate: '21/08/24', endDate: '29/08/24', isFavorite: true},
-    //   { id: 4, title: 'Task 4', description: 'Description for Task 4' , effortRequired: 1, category: 'Developement', status: 'COMPLETED' , startDate: '21/08/24', endDate: '29/08/24', isFavorite: false},
-    //   { id: 5, title: 'Task 5', description: 'Description for Task 5' , effortRequired: 1, category: 'Developement', status: 'PENDING', startDate: '21/08/24', endDate: '29/08/24', isFavorite: true},
-    //   { id: 3, title: 'Task 3', description: 'Description for Task 3' , effortRequired: 1, category: 'Developement', status: 'PENDING' , startDate: '21/08/24', endDate: '29/08/24', isFavorite: false},
-    //   { id: 4, title: 'Task 4', description: 'Description for Task 4' , effortRequired: 1, category: 'Developement', status: 'COMPLETED' , startDate: '21/08/24', endDate: '29/08/24', isFavorite: false},
-    //   { id: 5, title: 'Task 5', description: 'Description for Task 5' , effortRequired: 1, category: 'Developement', status: 'PENDING' , startDate: '21/08/24', endDate: '29/08/24', isFavorite: false}
+    //   { id: 1, title: 'Task 1', description: 'Description for Task 1', effortRequired: 1, category: 'Developement', status: 'IN_PROGRESS', startDate: '2024-08-23T21:32:47.824944', endDate: '2024-08-23T21:32:47.824944', isFavorite: true },
+    //   { id: 2, title: 'Task 2', description: 'Description for Task 2, Description for Task 2, Description for Task 2,Description for Task 2' , effortRequired: 1, category: 'Developement', status: 'COMPLETED', startDate: '2024-08-23T21:32:47.824944', endDate: '2024-08-23T21:32:47.824944', isFavorite: false },
+    //   { id: 3, title: 'Task 3', description: 'Description for Task 3' , effortRequired: 1, category: 'Developement', status: 'PENDING' , startDate: '2024-08-23T21:32:47.824944', endDate: '2024-08-23T21:32:47.824944', isFavorite: true},
+    //   { id: 4, title: 'Task 4', description: 'Description for Task 4' , effortRequired: 1, category: 'Developement', status: 'COMPLETED' , startDate: '2024-08-23T21:32:47.824944', endDate: '2024-08-23T21:32:47.824944', isFavorite: false},
+    //   { id: 5, title: 'Task 5', description: 'Description for Task 5' , effortRequired: 1, category: 'Developement', status: 'PENDING', startDate: '2024-08-23T21:32:47.824944', endDate: '2024-08-23T21:32:47.824944', isFavorite: true},
+    //   { id: 3, title: 'Task 3', description: 'Description for Task 3' , effortRequired: 1, category: 'Developement', status: 'PENDING' , startDate: '2024-08-23T21:32:47.824944', endDate: '2024-08-23T21:32:47.824944', isFavorite: false},
+    //   { id: 4, title: 'Task 4', description: 'Description for Task 4' , effortRequired: 1, category: 'Developement', status: 'COMPLETED' , startDate: '2024-08-23T21:32:47.824944', endDate: '2024-08-23T21:32:47.824944', isFavorite: false},
+    //   { id: 5, title: 'Task 5', description: 'Description for Task 5' , effortRequired: 1, category: 'Developement', status: 'PENDING' , startDate: '2024-08-23T21:32:47.824944', endDate: '2024-08-23T21:32:47.824944', isFavorite: false}
     // ];
     // this.dataSource.data = sampleTasks;
     // this.updatePaginatedTasks();
