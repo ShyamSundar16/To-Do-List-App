@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+
+  constructor(private userService: UserService){
+  }
+  getUserSession(){
+    return this.userService.user.valid;
+   }
+   clearSession(){
+     sessionStorage.clear();
+     this.userService.user.valid=false;
+   }
 }

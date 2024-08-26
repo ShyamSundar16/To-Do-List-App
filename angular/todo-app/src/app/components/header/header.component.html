@@ -4,20 +4,26 @@
       <nav class="navbar navbar-expand-lg navbar-light ml-auto">
         <ul>
           <li>
-            <a class="nav-item nav-link d-flex align-items-center" routerLink="/add" routerLinkActive="text-danger">
+            <a class="nav-item nav-link d-flex align-items-center" routerLink="/add" routerLinkActive="text-danger" *ngIf="getUserSession()">
               <mat-icon class="mr-2">add</mat-icon>Add
             </a>
           </li>   
           <li>
-            <a class="nav-item nav-link d-flex align-items-center" routerLink="/list" routerLinkActive="text-danger">
+            <a class="nav-item nav-link d-flex align-items-center" routerLink="/list" routerLinkActive="text-danger" *ngIf="getUserSession()">
               <mat-icon class="mr-2">list</mat-icon> List
             </a>
           </li>
           <li>
-            <a class="nav-item nav-link d-flex align-items-center" routerLink="/favorite" routerLinkActive="text-danger">
+            <a class="nav-item nav-link d-flex align-items-center" routerLink="/favorite" routerLinkActive="text-danger" *ngIf="getUserSession()">
               <mat-icon class="mr-2">favorite</mat-icon> Favorites
             </a>
-          </li>        </ul>
+          </li>
+          <li>
+            <a class="nav-item nav-link d-flex align-items-center" routerLink="/login" routerLinkActive="text-danger" *ngIf="getUserSession()" (click)="clearSession()">
+              <mat-icon class="mr-2">logout</mat-icon> Log out
+            </a>
+          </li>
+        </ul>
       </nav>
     </div>
   </header>
