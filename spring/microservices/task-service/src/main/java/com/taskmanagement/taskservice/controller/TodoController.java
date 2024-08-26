@@ -1,5 +1,6 @@
 package com.taskmanagement.taskservice.controller;
 
+import com.taskmanagement.taskservice.exception.TaskNotFoundException;
 import com.taskmanagement.taskservice.model.Status;
 import com.taskmanagement.taskservice.model.Todo;
 import com.taskmanagement.taskservice.service.TodoService;
@@ -50,7 +51,7 @@ public class TodoController {
     @Operation(summary = "Get a To-Do item by ID", description = "Retrieves a To-Do item by its ID")
     public ResponseEntity<Todo> getTodoById(@PathVariable String id) {
         Optional<Todo> todo = todoService.getTodoById(id);
-        return todo.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        return todo.map(ResponseEntity::ok).orElseThrow(() -> new TaskNotFoundException("Task not found with Id: "+id));
     }
 
     @CrossOrigin
