@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
         u.valid = true;
         u.email = user.username;
         this.userService.user = u;
-        this.router.navigate(["add"])
+        this.router.navigate(["list"])
         sessionStorage.setItem("userid", user.username);
       });
 

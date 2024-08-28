@@ -4,15 +4,15 @@
       <nav class="navbar navbar-expand-lg navbar-light ml-auto">
         <ul>
           <li>
-            <a class="nav-item nav-link d-flex align-items-center" routerLink="/add" routerLinkActive="text-danger" *ngIf="getUserSession()">
-              <mat-icon class="mr-2">add</mat-icon>Add
-            </a>
-          </li>   
-          <li>
             <a class="nav-item nav-link d-flex align-items-center" routerLink="/list" routerLinkActive="text-danger" *ngIf="getUserSession()">
               <mat-icon class="mr-2">list</mat-icon> List
             </a>
           </li>
+          <li>
+            <a class="nav-item nav-link d-flex align-items-center" routerLink="/add" routerLinkActive="text-danger" *ngIf="getUserSession()">
+              <mat-icon class="mr-2">add</mat-icon>Add
+            </a>
+          </li>   
           <li>
             <a class="nav-item nav-link d-flex align-items-center" routerLink="/favorite" routerLinkActive="text-danger" *ngIf="getUserSession()">
               <mat-icon class="mr-2">favorite</mat-icon> Favorites

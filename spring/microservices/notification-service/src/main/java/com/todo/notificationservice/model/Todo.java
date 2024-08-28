@@ -32,4 +32,5 @@ public class Todo {
     private String category;
     private Date reminderDate;
     private String eventName;
+    private Boolean isFavorite;
 }
