@@ -1,19 +1,15 @@
 package com.taskmanagement.taskservice.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.taskmanagement.taskservice.model.Status;
 import com.taskmanagement.taskservice.model.Todo;
 import com.taskmanagement.taskservice.repository.TodoRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
-//import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class TodoServiceImpl implements TodoService {
 
     @Autowired
@@ -32,11 +29,6 @@ public class TodoServiceImpl implements TodoService {
 
     @Value("${cloud.aws.end-point.uri}")
     private String endpoint;
-
-//    @Autowired
-//    private KafkaTemplate<String, String> kafkaTemplate;
-    ObjectMapper objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();;
-    private static final String TOPIC = "todo-events";
 
     @Override
     @CachePut(value = "todos", key = "#todo.id")
@@ -102,8 +94,10 @@ public class TodoServiceImpl implements TodoService {
 
     private void notifyUser(Todo todo, String eventName) {
         todo.setEventName(eventName);
-//            String todoJson = objectMapper.writeValueAsString(todo);
-//            kafkaTemplate.send(TOPIC, todoJson);
-        queueMessagingTemplate.send(endpoint, MessageBuilder.withPayload(todo).build());
+        try {
+            queueMessagingTemplate.send(endpoint, MessageBuilder.withPayload(todo).build());
+        } catch (Exception e) {
+            log.error("Failed to send message to the queue: " + e.getMessage());
+        }
     }
 }
