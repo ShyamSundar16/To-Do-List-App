@@ -13,7 +13,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
-import org.springframework.kafka.core.KafkaTemplate;
+//import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +33,8 @@ public class TodoServiceImpl implements TodoService {
     @Value("${cloud.aws.end-point.uri}")
     private String endpoint;
 
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
+//    @Autowired
+//    private KafkaTemplate<String, String> kafkaTemplate;
     ObjectMapper objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();;
     private static final String TOPIC = "todo-events";
 
