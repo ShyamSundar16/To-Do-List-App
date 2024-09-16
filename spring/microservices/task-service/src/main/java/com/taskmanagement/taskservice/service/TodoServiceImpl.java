@@ -8,10 +8,13 @@ import com.taskmanagement.taskservice.model.Status;
 import com.taskmanagement.taskservice.model.Todo;
 import com.taskmanagement.taskservice.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +26,12 @@ public class TodoServiceImpl implements TodoService {
 
     @Autowired
     private TodoRepository todoRepository;
+
+    @Autowired
+    private QueueMessagingTemplate queueMessagingTemplate;
+
+    @Value("${cloud.aws.end-point.uri}")
+    private String endpoint;
 
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
@@ -92,12 +101,9 @@ public class TodoServiceImpl implements TodoService {
     }
 
     private void notifyUser(Todo todo, String eventName) {
-        try {
-            todo.setEventName(eventName);
-            String todoJson = objectMapper.writeValueAsString(todo);
-            kafkaTemplate.send(TOPIC, todoJson);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException("Failed to convert Todo to JSON", e);
-        }
+        todo.setEventName(eventName);
+//            String todoJson = objectMapper.writeValueAsString(todo);
+//            kafkaTemplate.send(TOPIC, todoJson);
+        queueMessagingTemplate.send(endpoint, MessageBuilder.withPayload(todo).build());
     }
 }

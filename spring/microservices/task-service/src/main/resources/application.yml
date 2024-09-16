@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: taskservice
+  data:
+    mongodb:
+      database: taskdb
+      uri: mongodb+srv://admin:vvJlPhgzBAC2egJb@todo-app.jcre3.mongodb.net/
+#  kafka:
+#    bootstrap-servers: localhost:9092
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+cloud:
+  aws:
+    region:
+      static: us_east_1
+      auto: false
+    credentials:
+      access-key: ASIAYZZGTDFEVOPZK6BH
+      secret-key: fM4m+GQxbP815fckyoxJZWtKZ3wXH2ERIxsYQV0D
+    end-point:
+      uri: https://sqs.us-east-1.amazonaws.com/605134461257/TaskStatus.fifo
+server:
+  port: 8085
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
