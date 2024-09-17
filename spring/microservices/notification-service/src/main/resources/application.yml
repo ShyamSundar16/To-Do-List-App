@@ -27,9 +27,10 @@ cloud:
     stack:
       auto: false
     sqs:
-      enabled: true
       queue:
-        name: TaskStatus.fifo
+        TaskStatus:
+          name: TaskStatus.fifo
+          fifo: true
 server:
   port: 8045
 
