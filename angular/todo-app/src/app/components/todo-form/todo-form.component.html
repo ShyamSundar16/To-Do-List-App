@@ -10,7 +10,7 @@
                     <input type="text" placeholder="Title" name="Title" class="form-control mb-3" formControlName="title" required>
                     <input type="text" placeholder="Description" class="form-control mb-3" name="Description" formControlName="description" required>
                     <div class="form-row">
-                        <input type="number" placeholder="Effort Required" class="form-control mb-3" name="Effort" formControlName="effortRequired" required>
+                        <input type="number" placeholder="Effort Required" class="form-control mb-3" name="Effort" formControlName="effortRequired" min="1" required>
                         <select class="form-control mb-3" name="Status" formControlName="status" required>
                             <option value="" disabled selected>Select Status</option>
                             <option value="PENDING">Pending</option>

@@ -44,4 +44,3 @@
         "reminderDate": "2024-08-12T09:00:00"
     }
 ]
-pringframework.messaging.MessageDeliveryException: The request must contain the parameter MessageGroupId. (Service: AmazonSQS; Status Code: 400; Error Code: MissingParameter; Request ID: b0f6c749-3fd8-5875-abf7-982a10d05431; Proxy: null), failedMessage=GenericMessage [payload=com.taskmanagement.taskservice.model.Todo@2bd5333c, headers={id=78d02a10-fd86-af2c-33bf-812028c7db39, timestamp=1726556857898}]

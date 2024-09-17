@@ -28,7 +28,7 @@ public class MessageQueueService {
     @Autowired
     NotificationService notificationService;
 
-    @Scheduled(fixedDelay = 1000) // executes on every 2 second gap.
+    @Scheduled(fixedDelay = 1000)
     public void receiveMessages() {
         try {
             String queueUrl = amazonSQSClient.getQueueUrl(messageQueueTopic).getQueueUrl();

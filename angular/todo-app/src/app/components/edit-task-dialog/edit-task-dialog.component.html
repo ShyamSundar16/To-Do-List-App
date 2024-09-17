@@ -10,7 +10,9 @@
   </mat-form-field>
   <mat-form-field>
     <mat-label>Effort</mat-label>
-    <input matInput [(ngModel)]="data.task.effortRequired">
+    <input matInput type="number" placeholder="Effort Required" class="form-control mb-3" name="Effort" formControlName="effortRequired" min="1" required>
+
+    <!-- <input matInput [(ngModel)]="data.task.effortRequired" min="1"> -->
   </mat-form-field>
   <form [formGroup]="taskForm">
     <mat-form-field class="w-100 mb-3">
