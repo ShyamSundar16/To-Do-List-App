@@ -32,9 +32,9 @@ public class MessageQueueService {
     public void receiveMessages() {
         try {
             String queueUrl = amazonSQSClient.getQueueUrl(messageQueueTopic).getQueueUrl();
-            log.info("Reading SQS Queue done: URL {}", queueUrl);
             ReceiveMessageResult receiveMessageResult = amazonSQSClient.receiveMessage(queueUrl);
             receiveMessageResult.getMessages().stream().forEach(message -> {
+                log.info("Reading SQS Queue done: URL {}", queueUrl);
                 try {
                     Todo todo = objectMapper.readValue(message.getBody(), Todo.class);
                     notificationService.sendReminder(todo.getUserId(), "Task notification", todo.getEventName() + " task for : " + todo.getTitle());

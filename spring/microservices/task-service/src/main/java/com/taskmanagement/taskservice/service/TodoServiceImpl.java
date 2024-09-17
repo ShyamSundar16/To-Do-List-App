@@ -96,7 +96,7 @@ public class TodoServiceImpl implements TodoService {
         try {
             Map<String, Object> headers = new HashMap<>();
             headers.put("message-group-id","defaultValue");
-            headers.put("message-deduplication-id","defaultValue");
+            headers.put("message-deduplication-id",UUID.randomUUID().toString());
             queueMessagingTemplate.convertAndSend(endpoint, todo, headers);
         } catch (Exception e) {
             log.error("Failed to send message to the queue: " + e.getMessage());
