@@ -24,9 +24,12 @@ cloud:
     credentials:
       access-key: AKIAYZZGTDFEUG7PYG6K
       secret-key: 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
-    end-point:
-      uri: https://sqs.us-east-1.amazonaws.com/605134461257/TaskStatus.fifo
-
+    stack:
+      auto: false
+    sqs:
+      enabled: true
+      queue:
+        name: TaskStatus.fifo
 server:
   port: 8045
 
