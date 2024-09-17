@@ -13,8 +13,7 @@ import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -95,7 +94,10 @@ public class TodoServiceImpl implements TodoService {
     private void notifyUser(Todo todo, String eventName) {
         todo.setEventName(eventName);
         try {
-            queueMessagingTemplate.send(endpoint, MessageBuilder.withPayload(todo).build());
+            Map<String, Object> headers = new HashMap<>();
+            headers.put("message-group-id","defaultValue");
+            headers.put("message-deduplication-id","defaultValue");
+            queueMessagingTemplate.convertAndSend(endpoint, todo, headers);
         } catch (Exception e) {
             log.error("Failed to send message to the queue: " + e.getMessage());
         }
