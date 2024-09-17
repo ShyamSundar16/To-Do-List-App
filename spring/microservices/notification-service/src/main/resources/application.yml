@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: notificationservice
+  data:
+    mongodb:
+      database: taskdb
+      uri: mongodb+srv://admin:vvJlPhgzBAC2egJb@todo-app.jcre3.mongodb.net/
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: todo3576@gmail.com
+    password: tkfw ssim hnkq mykh
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+cloud:
+  aws:
+    region:
+      static: us_east_1
+      auto: false
+    credentials:
+      access-key: AKIAYZZGTDFEUG7PYG6K
+      secret-key: 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
+    end-point:
+      uri: https://sqs.us-east-1.amazonaws.com/605134461257/TaskStatus.fifo
+
+server:
+  port: 8045
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    preferIpAddress: true
