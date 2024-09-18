@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.kafka.core.KafkaTemplate;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +24,6 @@ class TodoServiceImplTest {
     @Mock
     private TodoRepository todoRepository;
 
-    @Mock
-    private KafkaTemplate<String, String> kafkaTemplate;
 
     @InjectMocks
     private TodoServiceImpl todoService;
