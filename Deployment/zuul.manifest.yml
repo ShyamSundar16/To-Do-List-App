@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zuul
+spec:
+  serviceName: zuul-gateway
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zuul
+  template:
+    metadata:
+      labels:
+        app: zuul
+    spec:
+      containers:
+        - name: zuul
+          image: shyam2035474/zuul-gateway:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8989
+          env:
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: eureka_service_address
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zuul-gateway
+  labels:
+    app: zuul-gateway
+spec:
+  ports:
+    - protocol: TCP
+      port: 8989
+      targetPort: 8989
+  selector:
+    app: zuul
