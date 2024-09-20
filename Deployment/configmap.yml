@@ -7,20 +7,10 @@ data:
   db_url: mongodb+srv://admin:vvJlPhgzBAC2egJb@todo-app.jcre3.mongodb.net/?retryWrites=true&w=majority
   user_database: userdb
   #task_database: taskdb
-  eureka.client.register-with-eureka: false
-  eureka.client.fetch-registry: false
   cloud.aws.region.static: us_east_1
-  cloud.aws.region.auto: false
   cloud.aws.end-point.uri: https://sqs.us-east-1.amazonaws.com/605134461257/TaskStatus.fifo
-  eureka.instance.preferIpAddress: true
-  management.endpoints.web.exposure.include: *
   management.endpoint.health.show-details: always
   spring.mail.host: smtp.gmail.com
-  spring.mail.port: 587
   spring.mail.username: todo3576@gmail.com
-  spring.mail.properties.mail.smtp.auth: true
-  spring.mail.properties.mail.smtp.starttls.enable: true
-  cloud.aws.stack.auto: false
   cloud.aws.sqs.queue.TaskStatus.name: TaskStatus.fifo
-  cloud.aws.sqs.queue.TaskStatus.fifo: true
 
