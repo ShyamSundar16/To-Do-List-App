@@ -6,7 +6,7 @@ data:
   eureka_service_address: http://eureka-0.eureka-service:8761/eureka
   db_url: mongodb+srv://admin:vvJlPhgzBAC2egJb@todo-app.jcre3.mongodb.net/?retryWrites=true&w=majority
   user_database: userdb
-  #task_database: taskdb
+  task_database: taskdb
   cloud.aws.region.static: us_east_1
   cloud.aws.end-point.uri: https://sqs.us-east-1.amazonaws.com/605134461257/TaskStatus.fifo
   management.endpoint.health.show-details: always

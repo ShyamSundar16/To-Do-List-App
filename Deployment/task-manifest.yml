@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: taskapp
+  labels:
+    app: taskapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taskapp
+  template:
+    metadata:
+      labels:
+        app: taskapp
+    spec:
+      containers:
+        - name: taskapp
+          image: shyam2035474/task-service:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9094
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-Djdk.tls.client.protocols=TLSv1.2"
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: eureka_service_address
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: db_url
+            - name: SPRING_DATA_MONGODB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: task_database
+            - name: CLOUD_AWS_CREDENTIALS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: cloud.aws.credentials.access-key
+            - name: CLOUD_AWS_CREDENTIALS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: cloud.aws.credentials.secret-key
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 9094
+      targetPort: 9094
+  selector:
+    app: taskapp

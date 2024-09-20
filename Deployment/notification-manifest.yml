@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notificationapp
+  labels:
+    app: notificationapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notificationapp
+  template:
+    metadata:
+      labels:
+        app: notificationapp
+    spec:
+      containers:
+        - name: notificationapp
+          image: shyam2035474/notification-service:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9095
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-Djdk.tls.client.protocols=TLSv1.2"
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: eureka_service_address
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: db_url
+            - name: SPRING_DATA_MONGODB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: configmap
+                  key: task_database
+            - name: CLOUD_AWS_CREDENTIALS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: cloud.aws.credentials.access-key
+            - name: CLOUD_AWS_CREDENTIALS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: cloud.aws.credentials.secret-key
+            - name: SPRING_MAIL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: spring.mail.password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 9095
+      targetPort: 9095
+  selector:
+    app: notificationapp
