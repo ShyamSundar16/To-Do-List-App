@@ -38,21 +38,6 @@ spec:
                 configMapKeyRef:
                   name: configmap
                   key: task_database
-            - name: CLOUD_AWS_REGION_STATIC
-              valueFrom:
-                configMapKeyRef:
-                  name: configmap
-                  key: cloud.aws.region.static
-            - name: CLOUD_AWS_CREDENTIALS_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: secret
-                  key: cloud.aws.credentials.access-key
-            - name: CLOUD_AWS_CREDENTIALS_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: secret
-                  key: cloud.aws.credentials.secret-key
             - name: SPRING_MAIL_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -62,7 +47,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: notification-service
 spec:
   ports:
     - protocol: TCP

@@ -38,6 +38,13 @@ eksctl create iamserviceaccount --cluster=todo-app-cluster --namespace=kube-syst
 # To create and inject certificates to webhooks
 kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.yaml
 
+# To get load balancers
+kubectl get pods -n kube-system
+
+# To delete the deployment
+kubectl delete deployment <Service name>
+
+
 docker build -t shyam2035474/eureka-server:0.0.1 .
 docker push shyam2035474/eureka-server:0.0.1
 
