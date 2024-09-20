@@ -19,11 +19,11 @@ spring:
 cloud:
   aws:
     region:
-      static: us_east_1
+      static: ${CLOUD_AWS_REGION_STATIC}
       auto: false
     credentials:
-      access-key: AKIAYZZGTDFEUG7PYG6K
-      secret-key: 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
+      access-key: ${CLOUD_AWS_CREDENTIALS_ACCESS_KEY}
+      secret-key: ${CLOUD_AWS_CREDENTIALS_SECRET_KEY}
     stack:
       auto: false
     sqs:
