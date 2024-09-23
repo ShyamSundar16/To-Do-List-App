@@ -1,3 +1,5 @@
+
+https://docs.aws.amazon.com/eks/latest/userguide/lbc-manifest.html
 # To configure AWS access key and secret access keys
 aws configure
 

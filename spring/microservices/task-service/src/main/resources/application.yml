@@ -16,7 +16,7 @@ cloud:
     end-point:
       uri: https://sqs.us-east-1.amazonaws.com/605134461257/TaskStatus.fifo
 server:
-  port: 8085
+  port: 9094
 
 eureka:
   client:

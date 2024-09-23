@@ -33,7 +33,7 @@ cloud:
           name: TaskStatus.fifo
           fifo: true
 server:
-  port: 8045
+  port: 9095
 
 eureka:
   client:
