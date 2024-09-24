@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/taskservice")
 @Tag(name = "Todo Controller", description = "API for managing To-Do items")
 public class TodoController {
 

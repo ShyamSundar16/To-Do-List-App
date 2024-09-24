@@ -10,14 +10,13 @@ spec:
   rules:
     - http:
         paths:
-#          - path: /
-#            pathType: Prefix
-#            backend:
-#              service:
-#                name: angular-service
-#                port:
-#                  number: 80
-
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: angular-service
+                port:
+                  number: 80
           - path: /usermanagement
             pathType: Prefix
             backend:
@@ -25,7 +24,13 @@ spec:
                 name: user-service
                 port:
                   number: 9093
-
+          - path: /authenticate/token
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service
+                port:
+                  number: 9093
           - path: /taskservice
             pathType: Prefix
             backend:

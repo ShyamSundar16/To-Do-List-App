@@ -8,7 +8,7 @@ import { User } from "../models/User";
 export class AuthUserService{
     private u = new AuthUser();
 
-    private authenticationurl: string = "http://localhost:8989/usermanagement/authenticate/token"
+    private authenticationurl: string = "http://k8s-default-awsingre-a48ac6e098-1533015257.us-east-1.elb.amazonaws.com/authenticate/token"
 
     constructor(private httpClient: HttpClient){
 

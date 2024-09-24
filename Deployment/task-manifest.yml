@@ -38,16 +38,6 @@ spec:
                 configMapKeyRef:
                   name: configmap
                   key: task_database
-            - name: CLOUD_AWS_CREDENTIALS_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: secret
-                  key: cloud.aws.credentials.access-key
-            - name: CLOUD_AWS_CREDENTIALS_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: secret
-                  key: cloud.aws.credentials.secret-key
 ---
 apiVersion: v1
 kind: Service

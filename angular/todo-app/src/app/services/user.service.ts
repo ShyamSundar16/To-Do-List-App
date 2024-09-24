@@ -6,11 +6,8 @@ import { User } from "../models/User";
 @Injectable({"providedIn": "root"})
 export class UserService{
     private u = new User();
-    private url: string = "http://localhost:8989/usermanagement/users";
-    private authenticationurl: string = "http://localhost:8989/usermanagement/authenticate/token"
-
-    // private url: string = "http://ec2-3-142-134-192.us-east-2.compute.amazonaws.com:8989/api/usermangement/users";
-    // private authenticationurl: string = "http://ec2-3-142-134-192.us-east-2.compute.amazonaws.com:8989/api/usermangement/authenticate/token"
+    private url: string = "http://k8s-default-awsingre-a48ac6e098-1533015257.us-east-1.elb.amazonaws.com/usermanagement";
+    private authenticationurl: string = "http://k8s-default-awsingre-a48ac6e098-1533015257.us-east-1.elb.amazonaws.com/authenticate/token"
 
     constructor(private httpClient: HttpClient){
 

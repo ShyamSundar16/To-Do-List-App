@@ -37,8 +37,8 @@ const routes: Routes = [
   {path: "add", component: TodoFormComponent},
   {path: "list", component: TodoListComponent},
   {path: "favorite", component: FavoriteTasksComponent},
-  { path: '', redirectTo: "/login", pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '', redirectTo: "/login", pathMatch: 'full' }
+  //{ path: '**', component: PageNotFoundComponent },
 
 ]
 @NgModule({
