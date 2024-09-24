@@ -1,5 +1,5 @@
-# Use an official Node.js runtime as the base image for building the Angular app
-FROM node:18-alpine AS build
+# Use an official Node.js runtime as the base image
+FROM node:latest as build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -8,25 +8,21 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the dependencies
-RUN npm install
+RUN npm ci
+RUN npm install -g @angular/cli
 
 # Copy the rest of the application code to the working directory
 COPY . .
 
 # Build the Angular app
-RUN npm run build
+RUN npm run build --configuration=production
 
-# Use an official Nginx runtime as the base image for serving the Angular app
-FROM nginx:alpine
+FROM nginx:latest
 
-# Copy the built Angular app from the build stage to the Nginx web root
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist/todo-app/browser /usr/share/nginx/html
-
-# Copy the custom Nginx configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose the port that Nginx will run on
+# Expose the port that the app will run on
 EXPOSE 80
 
-# Start Nginx server
-CMD ["nginx", "-g", "daemon off;"]
+# Define the command to run the app
+#CMD ["ng", "serve"]
