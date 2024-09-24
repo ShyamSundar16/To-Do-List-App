@@ -28,6 +28,7 @@ import { EditTaskDialogComponent } from './components/edit-task-dialog/edit-task
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { FavoriteTasksComponent } from './components/favorite-tasks/favorite-tasks.component';
+import { HealthCheckComponent } from './components/health-check/health-check.component';
 
 
 
@@ -37,8 +38,9 @@ const routes: Routes = [
   {path: "add", component: TodoFormComponent},
   {path: "list", component: TodoListComponent},
   {path: "favorite", component: FavoriteTasksComponent},
-  { path: '', redirectTo: "/login", pathMatch: 'full' }
-  //{ path: '**', component: PageNotFoundComponent },
+  { path: '', redirectTo: "/login", pathMatch: 'full' },
+  { path: 'health', component: HealthCheckComponent },
+  { path: '**', component: PageNotFoundComponent }
 
 ]
 @NgModule({
@@ -52,7 +54,8 @@ const routes: Routes = [
     TodoListComponent,
     PageNotFoundComponent,
     EditTaskDialogComponent,
-    FavoriteTasksComponent
+    FavoriteTasksComponent,
+    HealthCheckComponent
   ],
   imports: [
     BrowserModule,
