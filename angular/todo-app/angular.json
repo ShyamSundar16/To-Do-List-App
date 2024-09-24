@@ -76,9 +76,6 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "port": 80
-          },
           "configurations": {
             "production": {
               "buildTarget": "todo-app:build:production"

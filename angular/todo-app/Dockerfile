@@ -1,5 +1,5 @@
-# Use an official Node.js runtime as the base image
-FROM node:18-alpine
+# Use an official Node.js runtime as the base image for building the Angular app
+FROM node:18-alpine AS build
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -16,8 +16,17 @@ COPY . .
 # Build the Angular app
 RUN npm run build
 
-# Expose the port that the app will run on
+# Use an official Nginx runtime as the base image for serving the Angular app
+FROM nginx:alpine
+
+# Copy the built Angular app from the build stage to the Nginx web root
+COPY --from=build /app/dist/todo-app /usr/share/nginx/html
+
+# Copy the custom Nginx configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose the port that Nginx will run on
 EXPOSE 80
 
-# Define the command to run the app
-CMD ["npm", "start"]
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
