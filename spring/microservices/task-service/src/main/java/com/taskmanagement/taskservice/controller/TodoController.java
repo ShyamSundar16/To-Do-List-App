@@ -1,6 +1,8 @@
 package com.taskmanagement.taskservice.controller;
 
 import com.taskmanagement.taskservice.exception.TaskNotFoundException;
+import com.taskmanagement.taskservice.handlers.TodoCommandHandler;
+import com.taskmanagement.taskservice.handlers.TodoQueryHandler;
 import com.taskmanagement.taskservice.model.Status;
 import com.taskmanagement.taskservice.model.Todo;
 import com.taskmanagement.taskservice.service.TodoService;
@@ -22,11 +24,17 @@ public class TodoController {
     @Autowired
     private TodoService todoService;
 
+    @Autowired
+    private TodoCommandHandler todoCommandHandler;
+
+    @Autowired
+    private TodoQueryHandler todoQueryHandler;
+
     @CrossOrigin
     @PostMapping("/add-list")
     @Operation(summary = "Add a new To-Do item", description = "Creates a new To-Do item and saves it to the database")
-    public ResponseEntity<Todo> addTodo(@RequestBody Todo todo) {
-        Todo savedTodo = todoService.addTodo(todo);
+    public ResponseEntity<com.taskmanagement.taskservice.mysql.Todo> addTodo(@RequestBody com.taskmanagement.taskservice.mysql.Todo todo) {
+        com.taskmanagement.taskservice.mysql.Todo savedTodo = todoCommandHandler.handleAddTodoCommand(todo);
         return ResponseEntity.ok(savedTodo);
     }
 
@@ -42,7 +50,7 @@ public class TodoController {
     @GetMapping("/list/all")
     @Operation(summary = "Get all To-Do items", description = "Retrieves a list of all To-Do items")
     public ResponseEntity<List<Todo>> getAllTodos() {
-        List<Todo> todos = todoService.getAllTodos();
+        List<Todo> todos = todoQueryHandler.handleGetAllTodosQuery();
         return ResponseEntity.ok(todos);
     }
 

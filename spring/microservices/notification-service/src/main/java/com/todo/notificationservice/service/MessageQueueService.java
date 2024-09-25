@@ -6,6 +6,7 @@ import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.todo.notificationservice.model.Todo;
+import com.todo.notificationservice.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class MessageQueueService {
 
     @Autowired
     NotificationService notificationService;
+    @Autowired
+    private TodoRepository todoRepository;
+
 
     @Scheduled(fixedDelay = 1000)
     public void receiveMessages() {
@@ -38,6 +42,7 @@ public class MessageQueueService {
                 try {
                     Todo todo = objectMapper.readValue(message.getBody(), Todo.class);
                     notificationService.sendReminder(todo.getUserId(), "Task notification", todo.getEventName() + " task for : " + todo.getTitle());
+                    todoRepository.save(todo);
                 } catch (JsonProcessingException e) {
                     log.error("Error parsing message body to Todo object", e);
                 }
