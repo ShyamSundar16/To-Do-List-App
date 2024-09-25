@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/taskdb
     username: root
-    password: password
+    password: test
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

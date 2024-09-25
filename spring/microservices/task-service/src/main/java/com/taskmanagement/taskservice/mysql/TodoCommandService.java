@@ -10,14 +10,13 @@ import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class TodoCommandService {
 
     @Autowired
-    private TodoRepository todoRepository;
+    private TodoMySQLRepository todoRepository;
 
     @Autowired
     private QueueMessagingTemplate queueMessagingTemplate;
