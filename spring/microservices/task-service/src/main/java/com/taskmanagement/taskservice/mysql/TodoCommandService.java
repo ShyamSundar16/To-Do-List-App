@@ -1,12 +1,19 @@
 package com.taskmanagement.taskservice.mysql;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.aws.messaging.core.QueueMessagingTemplate;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -16,17 +23,22 @@ import java.util.*;
 public class TodoCommandService {
 
     @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+    ObjectMapper objectMapper = JsonMapper.builder().addModule(new JavaTimeModule()).build();
+    @Autowired
     private TodoMySQLRepository todoRepository;
 
-    @Autowired
-    private QueueMessagingTemplate queueMessagingTemplate;
-
-    @Value("${cloud.aws.end-point.uri}")
-    private String endpoint;
+//    @Autowired
+//    private QueueMessagingTemplate queueMessagingTemplate;
+//
+//    @Value("${cloud.aws.end-point.uri}")
+//    private String endpoint;
+    private static final String TOPIC = "todo-events";
 
     @CachePut(value = "todos", key = "#todo.id")
     public Todo addTodo(Todo todo) {
         notifyUser(todo, "CREATED");
+        todo.setId(todo.getUserId());
         return todoRepository.save(todo);
     }
 
@@ -74,14 +86,12 @@ public class TodoCommandService {
 
 
     private void notifyUser(Todo todo, String eventName) {
-        todo.setEventName(eventName);
         try {
-            Map<String, Object> headers = new HashMap<>();
-            headers.put("message-group-id","defaultValue");
-            headers.put("message-deduplication-id",UUID.randomUUID().toString());
-            queueMessagingTemplate.convertAndSend(endpoint, todo, headers);
-        } catch (Exception e) {
-            log.error("Failed to send message to the queue: " + e.getMessage());
+            todo.setEventName(eventName);
+            String todoJson = objectMapper.writeValueAsString(todo);
+            kafkaTemplate.send(TOPIC, todoJson);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Failed to convert Todo to JSON", e);
         }
     }
 }

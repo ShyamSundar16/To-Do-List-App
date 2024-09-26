@@ -1,12 +1,13 @@
 package com.taskmanagement.taskservice.mysql;
 
 import com.taskmanagement.taskservice.model.Status;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Transient;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -16,6 +17,7 @@ import java.util.Date;
 @Entity
 public class Todo {
     @Id
+    @Generated
     private String id;
 
     @NotNull(message = "Task name is mandatory")

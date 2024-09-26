@@ -22,12 +22,6 @@ public class TodoServiceImpl implements TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    @Autowired
-    private QueueMessagingTemplate queueMessagingTemplate;
-
-    @Value("${cloud.aws.end-point.uri}")
-    private String endpoint;
-
     @Override
     @CachePut(value = "todos", key = "#todo.id")
     public Todo addTodo(Todo todo) {
@@ -92,13 +86,13 @@ public class TodoServiceImpl implements TodoService {
 
     private void notifyUser(Todo todo, String eventName) {
         todo.setEventName(eventName);
-        try {
-            Map<String, Object> headers = new HashMap<>();
-            headers.put("message-group-id","defaultValue");
-            headers.put("message-deduplication-id",UUID.randomUUID().toString());
-            queueMessagingTemplate.convertAndSend(endpoint, todo, headers);
-        } catch (Exception e) {
-            log.error("Failed to send message to the queue: " + e.getMessage());
-        }
+//        try {
+//            Map<String, Object> headers = new HashMap<>();
+//            headers.put("message-group-id","defaultValue");
+//            headers.put("message-deduplication-id",UUID.randomUUID().toString());
+//            queueMessagingTemplate.convertAndSend(endpoint, todo, headers);
+//        } catch (Exception e) {
+//            log.error("Failed to send message to the queue: " + e.getMessage());
+//        }
     }
 }
